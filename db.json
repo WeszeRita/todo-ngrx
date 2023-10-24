@@ -1,0 +1,9 @@
+{
+  "todos": [
+    { "id": 1, "title": "generate a new ng project", "status": "completed" },
+    { "id": 2, "title": "install ngrx store", "status": "completed" },
+    { "id": 3, "title": "install ngrx effects", "status": "ongoing" },
+    { "id": 4, "title": "install tailwind", "status": "pending" },
+    { "id": 5, "title": "sleep", "status": "pending" }
+  ]
+}

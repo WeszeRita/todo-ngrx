@@ -1,0 +1,24 @@
+<h1 class="title">Todo list</h1>
+
+<button class="button button-new">Add new todo</button>
+
+<div class="p-10 flex gap-3 flex-wrap">
+  <div *ngFor="let card of (todos$ | async)" class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <span class="todo-title">{{card.title}}</span>
+      </div>
+      <div class="flip-card-back">
+        <span class="todo-title">{{card.title}}</span>
+        <span class="status">{{card.status}}</span>
+        <div>
+          <button class="button button-edit"><img alt="edit todo icon" src="assets/icons/edit.svg"></button>
+          <button class="button button-delete"><img alt="delete todo icon" src="assets/icons/delete.svg"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<router-outlet></router-outlet>

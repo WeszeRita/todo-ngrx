@@ -1,0 +1,11 @@
+.error {
+  @apply text-red-600 border border-red-700;
+}
+
+.formContainer {
+  @apply m-10;
+}
+
+.newTodoForm {
+  @apply px-40;
+}
