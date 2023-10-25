@@ -18,13 +18,13 @@ export class AddNewTodoComponent  implements OnInit {
 
   ngOnInit(): void {
     this.addNewTodoForm = new FormGroup({
-      newTodoTitle: new FormControl(null, Validators.required),
-      newTodoTitleStatus: new FormControl(null, Validators.required),
+      title: new FormControl(null, Validators.required),
+      status: new FormControl(null, Validators.required),
     })
   }
 
   get newTodoTitle() {
-    return this.addNewTodoForm.controls['newTodoTitle']
+    return this.addNewTodoForm.controls['title']
   }
 
   onSubmit() {

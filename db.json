@@ -1,9 +1,54 @@
 {
   "todos": [
-    { "id": 1, "title": "generate a new ng project", "status": "completed" },
-    { "id": 2, "title": "install ngrx store", "status": "completed" },
-    { "id": 3, "title": "install ngrx effects", "status": "ongoing" },
-    { "id": 4, "title": "install tailwind", "status": "pending" },
-    { "id": 5, "title": "sleep", "status": "pending" }
+    {
+      "id": 1,
+      "title": "generate a new ng project",
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "title": "install ngrx store",
+      "status": "completed"
+    },
+    {
+      "id": 3,
+      "title": "install ngrx effects",
+      "status": "ongoing"
+    },
+    {
+      "id": 4,
+      "title": "install tailwind",
+      "status": "pending"
+    },
+    {
+      "id": 5,
+      "title": "sleep",
+      "status": "pending"
+    },
+    {
+      "title": "erb",
+      "status": "completed",
+      "id": 7312
+    },
+    {
+      "title": "adfb",
+      "status": "ongoing",
+      "id": 2665
+    },
+    {
+      "title": "dah",
+      "status": "pending",
+      "id": 1021
+    },
+    {
+      "title": "srg",
+      "status": "ongoing",
+      "id": 8093
+    },
+    {
+      "title": "todo",
+      "status": "pending",
+      "id": 8094
+    }
   ]
 }

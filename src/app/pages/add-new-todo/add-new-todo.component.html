@@ -13,7 +13,7 @@
         [class.error]="newTodoTitle.invalid && newTodoTitle.touched"
         [placeholder]="'new todo'"
         class="bg-grey-100 w-full border rounded p-2 h-8 box-border"
-        formControlName="newTodoTitle"
+        formControlName="title"
         id="newTodo-title"
         type="text">
       <span
@@ -25,15 +25,15 @@
 
     <div>
       <h3 class="mt-3">Status</h3>
-      <input formControlName="newTodoTitleStatus" id="{{ RadioButton.completed }}" name="newTodoTitleStatus"
+      <input formControlName="status" id="{{ RadioButton.completed }}" name="status"
              type="radio" value="{{ RadioButton.completed }}">
       <label for="{{ RadioButton.completed }}">{{ RadioButton.completed }}</label><br>
 
-      <input formControlName="newTodoTitleStatus" id="{{ RadioButton.ongoing }}" name="newTodoTitleStatus" type="radio"
+      <input formControlName="status" id="{{ RadioButton.ongoing }}" name="status" type="radio"
              value="{{ RadioButton.ongoing }}">
       <label for="{{ RadioButton.ongoing }}">{{ RadioButton.ongoing }}</label><br>
 
-      <input formControlName="newTodoTitleStatus" id="{{ RadioButton.pending }}" name="newTodoTitleStatus" type="radio"
+      <input formControlName="status" id="{{ RadioButton.pending }}" name="status" type="radio"
              value="{{ RadioButton.pending }}">
       <label for="{{ RadioButton.pending }}">{{ RadioButton.pending }}</label><br>
     </div>

@@ -18,11 +18,6 @@ export class TodoService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers };
 
-    return this.http.post<ITodo>(this.url, { ...todo, id: this.generateId()}, options);
+    return this.http.post<ITodo>(this.url, { ...todo}, options);
   }
-
-  private generateId(): number {
-    return Math.floor(1000 + Math.random() * 9000);
-  }
-
 }
