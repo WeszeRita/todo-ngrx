@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { RadioButton} from '../../../constants/radioButton.enum';
+import { RadioButton } from '../../../constants/radioButton.enum';
+import { TodoFacadeService } from '../../../service/todo-facade.service';
 
 @Component({
   selector: 'app-add-new-todo',
@@ -13,16 +14,24 @@ export class AddNewTodoComponent  implements OnInit {
   isNewTodoSavedMessage = false;
   readonly radioButton = RadioButton;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private todoFacadeService: TodoFacadeService) {}
 
   ngOnInit(): void {
     this.addNewTodoForm = new FormGroup({
-      newTodo: new FormControl(null, Validators.required),
+      newTodoTitle: new FormControl(null, Validators.required),
+      newTodoTitleStatus: new FormControl(null, Validators.required),
     })
   }
 
-  onSubmit() {
+  get newTodoTitle() {
+    return this.addNewTodoForm.controls['newTodoTitle']
+  }
 
+  onSubmit() {
+    const newTodo = { ...this.addNewTodoForm.value};
+    console.log(newTodo);
+    this.todoFacadeService.createNewTodo(newTodo);
+    this.addNewTodoForm.reset();
   }
 
   protected readonly RadioButton = RadioButton;

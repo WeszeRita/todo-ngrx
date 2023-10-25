@@ -1,15 +1,14 @@
-import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { TodoService } from './todo.service';
 import { ITodo } from '../models/todo.model';
+import { NewTodoActions } from '../store/todo.actions';
 
 @Injectable()
 export class TodoFacadeService {
-  constructor(private store: Store, private todoService: TodoService) {}
+  constructor(private store: Store) {}
 
-  // getTodos(): Observable<ITodo[]> {
-  //   return this.store.select((state: object) => ITodo[]): Observable<ITodo[]>)
-  // }
+  createNewTodo(todo: ITodo): void {
+    this.store.dispatch(NewTodoActions.createTodo({ todo }));
+  }
 }

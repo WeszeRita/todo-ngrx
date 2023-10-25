@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ITodo } from '../models/todo.model';
@@ -13,4 +13,16 @@ export class TodoService {
   getTodos(): Observable<ITodo[]> {
     return this.http.get<ITodo[]>(this.url);
   }
+
+  createNewTodo(todo: ITodo): Observable<ITodo> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const options = { headers };
+
+    return this.http.post<ITodo>(this.url, { ...todo, id: this.generateId()}, options);
+  }
+
+  private generateId(): number {
+    return Math.floor(1000 + Math.random() * 9000);
+  }
+
 }

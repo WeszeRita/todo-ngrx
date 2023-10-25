@@ -1,6 +1,6 @@
 <h1 class="title">Todo list</h1>
 
-<button class="button button-new">Add new todo</button>
+<button class="button button-new" routerLink="/addNewTodo">Add new todo</button>
 
 <div class="p-10 flex gap-3 flex-wrap">
   <div *ngFor="let card of (todos$ | async)" class="flip-card">

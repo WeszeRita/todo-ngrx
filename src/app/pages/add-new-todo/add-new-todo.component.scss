@@ -9,3 +9,7 @@
 .newTodoForm {
   @apply px-40;
 }
+
+.button-new {
+  @apply bg-blue-600 rounded-full py-2 px-4 m-6 text-white absolute right-0;
+}
