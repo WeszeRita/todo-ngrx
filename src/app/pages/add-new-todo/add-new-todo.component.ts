@@ -12,7 +12,6 @@ import { TodoFacadeService } from '../../../service/todo-facade.service';
 export class AddNewTodoComponent  implements OnInit {
   addNewTodoForm!: FormGroup;
   isNewTodoSavedMessage = false;
-  readonly radioButton = RadioButton;
 
   constructor(private todoFacadeService: TodoFacadeService) {}
 

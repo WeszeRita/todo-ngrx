@@ -1,4 +1,4 @@
-import { effect, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
 import { HttpClientModule } from '@angular/common/http';
