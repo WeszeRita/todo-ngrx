@@ -1,9 +1,29 @@
 .error {
-  @apply text-red-600 border border-red-700;
+  @apply text-red-600 border border-red-600;
+}
+
+.error-message {
+  @apply text-red-600 block absolute;
 }
 
 .formContainer {
   @apply m-10;
+}
+
+.title {
+  @apply text-xl font-medium pt-10 px-40;
+}
+
+.red-asterisk {
+  @apply block after:content-['*'] after:ml-0.5 after:text-red-600 mt-6;
+}
+
+.todo-input {
+  @apply w-full border rounded p-2 h-8 box-border;
+}
+
+.new-todo-title {
+  @apply mt-3;
 }
 
 .newTodoForm {

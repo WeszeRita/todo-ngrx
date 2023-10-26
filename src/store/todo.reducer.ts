@@ -2,7 +2,6 @@ import { createReducer, on } from '@ngrx/store';
 
 import { ITodo } from '../models/todo.model';
 import { TodoActions } from './todo.actions';
-import { state } from '@angular/animations';
 
 export const todoFeatureKey = 'todo';
 

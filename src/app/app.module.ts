@@ -12,6 +12,7 @@ import { AddNewTodoComponent } from './pages/add-new-todo/add-new-todo.component
 import { TodoFacadeService } from '../service/todo-facade.service';
 import { todoFeatureKey, todoReducer } from '../store/todo.reducer';
 import { TodoEffects } from '../store/todo.effects';
+import { LoadTodoEffects } from '../store/loadTodo.effects';
 
 @NgModule({
   declarations: [
@@ -24,10 +25,10 @@ import { TodoEffects } from '../store/todo.effects';
     HttpClientModule,
     ReactiveFormsModule,
     StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([TodoEffects]),
+    EffectsModule.forRoot([TodoEffects, LoadTodoEffects]),
     StoreModule.forFeature(todoFeatureKey, todoReducer),
   ],
   providers: [TodoService, TodoFacadeService],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

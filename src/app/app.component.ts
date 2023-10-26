@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+
 import { ITodo } from '../models/todo.model';
 import { TodoFacadeService } from '../service/todo-facade.service';
 
@@ -7,17 +8,14 @@ import { TodoFacadeService } from '../service/todo-facade.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit{
   todos$!: Observable<ITodo[]>
 
-  constructor(private todoFacadeService: TodoFacadeService) {
-  }
+  constructor(private todoFacadeService: TodoFacadeService) {}
 
   ngOnInit():void {
     this.todoFacadeService.initTodosFromStore();
     this.todos$ = this.todoFacadeService.getAllTodosFromStore();
     }
-
 }

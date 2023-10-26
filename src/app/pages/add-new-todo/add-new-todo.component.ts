@@ -7,11 +7,9 @@ import { TodoFacadeService } from '../../../service/todo-facade.service';
   selector: 'app-add-new-todo',
   templateUrl: './add-new-todo.component.html',
   styleUrls: ['./add-new-todo.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddNewTodoComponent  implements OnInit {
   addNewTodoForm!: FormGroup;
-  isNewTodoSavedMessage = false;
 
   constructor(private todoFacadeService: TodoFacadeService) {}
 
@@ -23,12 +21,11 @@ export class AddNewTodoComponent  implements OnInit {
   }
 
   get newTodoTitle() {
-    return this.addNewTodoForm.controls['title']
+    return this.addNewTodoForm.controls['title'];
   }
 
   onSubmit() {
     const newTodo = { ...this.addNewTodoForm.value};
-    console.log(newTodo);
     this.todoFacadeService.createNewTodo(newTodo);
     this.addNewTodoForm.reset();
   }

@@ -2,6 +2,10 @@
   @apply font-extrabold text-5xl m-10;
 }
 
+.container {
+  @apply p-10 flex gap-3 flex-wrap;
+}
+
 .button {
   @apply border border-black rounded p-2.5 m-2.5;
 }

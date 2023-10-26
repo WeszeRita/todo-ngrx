@@ -1,54 +1,66 @@
-<div *ngIf="!isNewTodoSavedMessage" class="formContainer">
-  <h2 class="text-xl font-medium text-grey-900 pt-10 px-40">Add a new todo</h2>
+<div class="formContainer">
+    <h1 class="title">Add a new todo</h1>
 
-  <form (ngSubmit)="onSubmit()" [formGroup]="addNewTodoForm" class="newTodoForm">
-    <div>
-      <label
-        class="block after:content-['*'] after:ml-0.5 after:text-red-600 mt-6"
-        for="newTodo-title">
-        new todo
-      </label>
+    <form (ngSubmit)="onSubmit()" [formGroup]="addNewTodoForm" class="newTodoForm">
+        <div>
+            <label
+                    class="red-asterisk"
+                    for="newTodo-title">
+                new todo
+            </label>
 
-      <input
-        [class.error]="newTodoTitle.invalid && newTodoTitle.touched"
-        [placeholder]="'new todo'"
-        class="bg-grey-100 w-full border rounded p-2 h-8 box-border"
-        formControlName="title"
-        id="newTodo-title"
-        type="text">
-      <span
-        *ngIf="newTodoTitle.invalid && newTodoTitle.touched"
-        class="text-red-600 block absolute">
+            <input
+                    id="newTodo-title"
+                    class="todo-input"
+                    [class.error]="newTodoTitle.invalid && newTodoTitle.touched"
+                    [placeholder]="'new todo'"
+                    formControlName="title"
+                    type="text">
+            <span
+                    *ngIf="newTodoTitle.invalid && newTodoTitle.touched"
+                    class="error-message">
                 please, write here the new todo
       </span>
-    </div>
+        </div>
 
-    <div>
-      <h3 class="mt-3">Status</h3>
-      <input formControlName="status" id="{{ RadioButton.completed }}" name="status"
-             type="radio" value="{{ RadioButton.completed }}">
-      <label for="{{ RadioButton.completed }}">{{ RadioButton.completed }}</label><br>
+        <div>
+            <h3 class="new-todo-title red-asterisk">Status</h3>
+            <input
+                   id="'RadioButton.completed'"
+                   formControlName="status"
+                   name="status"
+                   type="radio"
+                   value="{{ RadioButton.completed }}">
+            <label for="'RadioButton.completed'">{{ RadioButton.completed }}</label><br>
 
-      <input formControlName="status" id="{{ RadioButton.ongoing }}" name="status" type="radio"
-             value="{{ RadioButton.ongoing }}">
-      <label for="{{ RadioButton.ongoing }}">{{ RadioButton.ongoing }}</label><br>
+            <input
+                   id="'RadioButton.ongoing'"
+                   formControlName="status"
+                   name="status"
+                   type="radio"
+                   value="{{ RadioButton.ongoing }}">
+            <label for="'RadioButton.ongoing'">{{ RadioButton.ongoing }}</label><br>
 
-      <input formControlName="status" id="{{ RadioButton.pending }}" name="status" type="radio"
-             value="{{ RadioButton.pending }}">
-      <label for="{{ RadioButton.pending }}">{{ RadioButton.pending }}</label><br>
-    </div>
+            <input
+                   id="'RadioButton.pending'"
+                   formControlName="status"
+                   name="status"
+                   type="radio"
+                   value="{{ RadioButton.pending }}">
+            <label for="'RadioButton.pending'">{{ RadioButton.pending }}</label><br>
+        </div>
 
-    <span
-      *ngIf="addNewTodoForm.invalid && addNewTodoForm.touched"
-      class="text-red-600 block absolute">
-                please, mark the status
-      </span>
+        <span
+                *ngIf="addNewTodoForm.invalid && addNewTodoForm.touched"
+                class="text-red-600 block absolute">
+            please, mark the status
+        </span>
 
-    <button
-      [disabled]="addNewTodoForm.invalid"
-      class="button button-new"
-      type="submit">
-      add new todo
-    </button>
-  </form>
+        <button
+                class="button button-new"
+                type="submit"
+                [disabled]="addNewTodoForm.invalid">
+            add new todo
+        </button>
+    </form>
 </div>
