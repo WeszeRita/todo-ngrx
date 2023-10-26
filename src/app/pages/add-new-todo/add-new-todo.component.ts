@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RadioButton } from '../../../constants/radioButton.enum';
 import { TodoFacadeService } from '../../../service/todo-facade.service';
