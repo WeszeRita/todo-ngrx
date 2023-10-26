@@ -14,14 +14,6 @@
   @apply ml-10;
 }
 
-.button-edit::ng-deep {
-  svg {
-    path {
-      @apply fill-amber-700 hover:fill-amber-300;
-    }
-  }
-}
-
 .flip-card {
   @apply w-1/4 h-48 perspective rounded-xl;
 }
