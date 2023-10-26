@@ -9,6 +9,8 @@ import { ITodo } from '../models/todo.model';
 
 @Injectable()
 export class TodoEffects {
+  // put your effects to one file
+  // use one code style
   createTodo$ = createEffect((): Observable<Action> =>
     this.actions$.pipe(
       ofType(TodoActions.createTodo),
@@ -22,6 +24,5 @@ export class TodoEffects {
     ),
   );
 
-  constructor(private actions$: Actions, private todoService: TodoService) {
-  }
+  constructor(private actions$: Actions, private todoService: TodoService) {}
 }

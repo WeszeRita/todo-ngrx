@@ -10,12 +10,12 @@ import { TodoFacadeService } from '../service/todo-facade.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit{
-  todos$!: Observable<ITodo[]>
+  todos$: Observable<ITodo[]>
 
   constructor(private todoFacadeService: TodoFacadeService) {}
 
-  ngOnInit():void {
+  ngOnInit(): void {
     this.todoFacadeService.initTodosFromStore();
     this.todos$ = this.todoFacadeService.getAllTodosFromStore();
-    }
+  }
 }

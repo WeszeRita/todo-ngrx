@@ -24,9 +24,11 @@ import { LoadTodoEffects } from '../store/loadTodo.effects';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    // duplicate
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([TodoEffects, LoadTodoEffects]),
     StoreModule.forFeature(todoFeatureKey, todoReducer),
+    // TODO: enable the Redux plugin support for checking data & actions & install in Chrome
   ],
   providers: [TodoService, TodoFacadeService],
   bootstrap: [AppComponent],

@@ -14,10 +14,12 @@ export class TodoFacadeService {
     this.store.dispatch(TodoActions.createTodo({ todo }));
   }
 
+  // initTodos
   initTodosFromStore(): void {
     this.store.dispatch(TodoActions.loadTodos());
   }
 
+  // change the name to "getTodos"
   getAllTodosFromStore(): Observable<ITodo[]> {
     return this.store.select(TodoSelectors.selectTodos)
       .pipe(filter(Boolean));

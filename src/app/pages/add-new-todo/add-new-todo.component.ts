@@ -7,6 +7,7 @@ import { TodoFacadeService } from '../../../service/todo-facade.service';
   selector: 'app-add-new-todo',
   templateUrl: './add-new-todo.component.html',
   styleUrls: ['./add-new-todo.component.scss'],
+  // use OnPush strategy
 })
 export class AddNewTodoComponent  implements OnInit {
   addNewTodoForm!: FormGroup;
@@ -20,15 +21,18 @@ export class AddNewTodoComponent  implements OnInit {
     })
   }
 
+  // getters should be placed above the constructor
   get newTodoTitle() {
     return this.addNewTodoForm.controls['title'];
   }
 
   onSubmit() {
+    // use the value directly as passing argument to function
     const newTodo = { ...this.addNewTodoForm.value};
     this.todoFacadeService.createNewTodo(newTodo);
     this.addNewTodoForm.reset();
   }
 
+  // fields should be moved up
   protected readonly RadioButton = RadioButton;
 }

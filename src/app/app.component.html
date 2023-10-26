@@ -15,9 +15,13 @@
                 <span class="status">{{ card.status }}</span>
 
                 <div>
-                    <button class="button button-edit"><img alt="edit todo icon" src="assets/icons/edit.svg"></button>
+                    <button class="button button-edit">
+                      <!-- move alt to the end -->
+                      <img alt="edit todo icon" src="assets/icons/edit.svg">
+                    </button>
 
-                    <button class="button button-delete"><img alt="delete todo icon" src="assets/icons/delete.svg">
+                    <button class="button button-delete">
+                      <img alt="delete todo icon" src="assets/icons/delete.svg">
                     </button>
                 </div>
             </div>
@@ -25,4 +29,5 @@
     </div>
 </div>
 
+<!-- We don't need routing for TODO app -->
 <router-outlet></router-outlet>

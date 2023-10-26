@@ -20,13 +20,3 @@ export namespace TodoActions {
   export const todoCreated = createAction(TodoAction.todoCreated, props<{ todo: ITodo }>());
   export const errorTodo = createAction(TodoAction.errorTodo, props<{ error: Error }>());
 }
-
-
-// TODO: question:
-// interface IPropsTodo {
-//   todo: ITodo
-// }
-//
-// ->
-//
-// props<{ IPropsTodo }>())

@@ -1,13 +1,10 @@
+<!-- Align your code & sort attributes -->
 <div class="formContainer">
     <h1 class="title">Add a new todo</h1>
 
-    <form (ngSubmit)="onSubmit()" [formGroup]="addNewTodoForm" class="newTodoForm">
+    <form class="newTodoForm" [formGroup]="addNewTodoForm" (ngSubmit)="onSubmit()">
         <div>
-            <label
-                    class="red-asterisk"
-                    for="newTodo-title">
-                new todo
-            </label>
+            <label class="red-asterisk" for="newTodo-title">new todo</label>
 
             <input
                     id="newTodo-title"

@@ -6,8 +6,10 @@ import { TodoActions } from './todo.actions';
 import { ITodo } from '../models/todo.model';
 import { TodoService } from '../service/todo.service';
 
+// fix the name of files
 @Injectable()
 export class LoadTodoEffects {
+  // not categories :)
   loadCategories$ = createEffect((): Observable<Action> => {
     return this.actions$
       .pipe(

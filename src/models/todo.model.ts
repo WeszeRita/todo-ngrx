@@ -1,5 +1,8 @@
+import { RadioButton } from '../constants/radioButton.enum';
+
 export interface ITodo {
   id: number;
   title: string;
-  status: "completed" | "ongoing" | "pending";
+  // single quotes, optimizing it
+  status: `${RadioButton}`;
 }
