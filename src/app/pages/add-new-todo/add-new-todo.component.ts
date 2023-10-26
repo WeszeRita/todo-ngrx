@@ -18,7 +18,7 @@ export class AddNewTodoComponent  implements OnInit {
   ngOnInit(): void {
     this.addNewTodoForm = new FormGroup({
       title: new FormControl(null, Validators.required),
-      status: new FormControl(null, Validators.required),
+      status: new FormControl('ongoing', Validators.required),
     })
   }
 

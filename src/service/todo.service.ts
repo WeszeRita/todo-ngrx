@@ -10,7 +10,7 @@ export class TodoService {
 
   constructor(private http: HttpClient) {}
 
-  getTodos(): Observable<ITodo[]> {
+  getAllTodosFromDb(): Observable<ITodo[]> {
     return this.http.get<ITodo[]>(this.url);
   }
 

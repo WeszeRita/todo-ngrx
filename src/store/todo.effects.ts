@@ -4,19 +4,19 @@ import { Action } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { TodoService } from '../service/todo.service';
-import { NewTodoActions } from './todo.actions';
+import { TodoActions } from './todo.actions';
 import { ITodo } from '../models/todo.model';
 
 @Injectable()
 export class TodoEffects {
   createTodo$ = createEffect((): Observable<Action> =>
     this.actions$.pipe(
-      ofType(NewTodoActions.createTodo),
+      ofType(TodoActions.createTodo),
       switchMap(({ todo }) => {
         return this.todoService.createNewTodo(todo)
           .pipe(
-            map((todo: ITodo) => NewTodoActions.todoCreated({ todo })),
-            catchError((error: Error) => of(NewTodoActions.errorTodo({ error }))),
+            map((todo: ITodo) => TodoActions.todoCreated({ todo })),
+            catchError((error: Error) => of(TodoActions.errorTodo({ error }))),
           );
       }),
     ),

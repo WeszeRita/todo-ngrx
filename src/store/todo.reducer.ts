@@ -1,7 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
 
 import { ITodo } from '../models/todo.model';
-import { NewTodoActions } from './todo.actions';
+import { TodoActions } from './todo.actions';
+import { state } from '@angular/animations';
 
 export const todoFeatureKey = 'todo';
 
@@ -17,7 +18,14 @@ export const initialState: ITodoState = {
 
 export const todoReducer = createReducer(
   initialState,
-  on(NewTodoActions.todoCreated, (state, action) => ({
+  on(TodoActions.loadTodos, (state) => ({
+    ...state,
+  })),
+  on(TodoActions.todoLoaded, (state, action) => ({
+    ...state,
+    todos: action.todos,
+  })),
+  on(TodoActions.todoCreated, (state, action) => ({
     ...state,
     todos: [...(state.todos || []), action.todo],
   })),
