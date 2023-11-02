@@ -1,66 +1,50 @@
 <div class="formContainer">
     <h1 class="title">Add a new todo</h1>
 
-    <form (ngSubmit)="onSubmit()" [formGroup]="addNewTodoForm" class="newTodoForm">
+    <form class="newTodoForm" [formGroup]="addNewTodoForm" (ngSubmit)="onSubmit()">
         <div>
-            <label
-                    class="red-asterisk"
-                    for="newTodo-title">
-                new todo
-            </label>
+            <label class="red-asterisk" for="newTodo-title">New todo</label>
 
             <input
                     id="newTodo-title"
                     class="todo-input"
                     [class.error]="newTodoTitle.invalid && newTodoTitle.touched"
-                    [placeholder]="'new todo'"
+                    [placeholder]="'what are you going to do next...'"
                     formControlName="title"
                     type="text">
-            <span
-                    *ngIf="newTodoTitle.invalid && newTodoTitle.touched"
-                    class="error-message">
-                please, write here the new todo
-      </span>
+            <span *ngIf="newTodoTitle.invalid && newTodoTitle.touched" class="error-message">please, write here the new todo</span>
         </div>
 
         <div>
             <h3 class="new-todo-title red-asterisk">Status</h3>
             <input
-                   id="'RadioButton.completed'"
-                   formControlName="status"
-                   name="status"
-                   type="radio"
-                   value="{{ RadioButton.completed }}">
+                    id="'RadioButton.completed'"
+                    name="status"
+                    type="radio"
+                    formControlName="status"
+                    value="{{ RadioButton.completed }}">
             <label for="'RadioButton.completed'">{{ RadioButton.completed }}</label><br>
 
             <input
-                   id="'RadioButton.ongoing'"
-                   formControlName="status"
-                   name="status"
-                   type="radio"
-                   value="{{ RadioButton.ongoing }}">
+                    id="'RadioButton.ongoing'"
+                    name="status"
+                    type="radio"
+                    formControlName="status"
+                    value="{{ RadioButton.ongoing }}">
             <label for="'RadioButton.ongoing'">{{ RadioButton.ongoing }}</label><br>
 
             <input
-                   id="'RadioButton.pending'"
-                   formControlName="status"
-                   name="status"
-                   type="radio"
-                   value="{{ RadioButton.pending }}">
+                    id="'RadioButton.pending'"
+                    name="status"
+                    type="radio"
+                    formControlName="status"
+                    value="{{ RadioButton.pending }}">
+
             <label for="'RadioButton.pending'">{{ RadioButton.pending }}</label><br>
         </div>
 
-        <span
-                *ngIf="addNewTodoForm.invalid && addNewTodoForm.touched"
-                class="text-red-600 block absolute">
-            please, mark the status
-        </span>
+        <span *ngIf="addNewTodoForm.invalid && addNewTodoForm.touched" class="text-red-600 block absolute">please, mark the status</span>
 
-        <button
-                class="button button-new"
-                type="submit"
-                [disabled]="addNewTodoForm.invalid">
-            add new todo
-        </button>
+        <button class="button button-new" [disabled]="addNewTodoForm.invalid" type="submit">add new todo</button>
     </form>
 </div>

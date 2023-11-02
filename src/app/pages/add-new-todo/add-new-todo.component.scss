@@ -7,7 +7,7 @@
 }
 
 .formContainer {
-  @apply m-10;
+  @apply m-10 bg-gray-100;
 }
 
 .title {
@@ -31,5 +31,5 @@
 }
 
 .button-new {
-  @apply bg-blue-600 rounded-full py-2 px-4 m-6 text-white absolute right-0;
+  @apply bg-blue-600 rounded-full py-2 px-4 my-6 text-white right-0;
 }

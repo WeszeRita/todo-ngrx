@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ITodo } from '../models/todo.model';
+import { RadioButton } from '../constants/radio-button.enum';
 
 @Injectable()
 export class TodoService {
@@ -10,7 +11,7 @@ export class TodoService {
 
   constructor(private http: HttpClient) {}
 
-  getAllTodosFromDb(): Observable<ITodo[]> {
+  getTodos(): Observable<ITodo[]> {
     return this.http.get<ITodo[]>(this.url);
   }
 
@@ -19,5 +20,16 @@ export class TodoService {
     const options = { headers };
 
     return this.http.post<ITodo>(this.url, { ...todo}, options);
+  }
+
+  editTodo(id: number, title: string, status: `${ RadioButton }`): Observable<ITodo> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const options = { headers };
+
+    return this.http.patch<ITodo>(`${this.url}/${id}`, { title, status }, options);     // patch or put?
+  }
+
+  removeTodo(id: number): Observable<ITodo> {
+    return this.http.delete<ITodo>(`${this.url}/${id}`);
   }
 }

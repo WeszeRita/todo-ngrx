@@ -9,19 +9,63 @@ import { ITodo } from '../models/todo.model';
 
 @Injectable()
 export class TodoEffects {
-  createTodo$ = createEffect((): Observable<Action> =>
-    this.actions$.pipe(
-      ofType(TodoActions.createTodo),
-      switchMap(({ todo }) => {
-        return this.todoService.createNewTodo(todo)
-          .pipe(
-            map((todo: ITodo) => TodoActions.todoCreated({ todo })),
-            catchError((error: Error) => of(TodoActions.errorTodo({ error }))),
-          );
-      }),
-    ),
-  );
+  createTodo$ = createEffect((): Observable<Action> => {
+    return this.actions$
+      .pipe(
+        ofType(TodoActions.createTodo),
+        switchMap(({ todo }) => {
+          return this.todoService.createNewTodo(todo)
+            .pipe(
+              map((todo: ITodo) => TodoActions.todoCreated({ todo })),
+              catchError((error: Error) => of(TodoActions.errorTodo({ error }))),
+            );
+        }),
+      );
+  });
 
-  constructor(private actions$: Actions, private todoService: TodoService) {
-  }
+  loadTodos$ = createEffect((): Observable<Action> => {
+    return this.actions$
+      .pipe(
+        ofType(TodoActions.loadTodos),
+        switchMap(() => {
+          return this.todoService.getTodos()
+            .pipe(
+              map((todos: ITodo[]) => TodoActions.todoLoaded({ todos: todos })),
+              catchError((error) => of(TodoActions.errorLoadTodos({ error: new Error(error) }))),
+            );
+        }),
+      );
+  });
+
+  editTodo$ = createEffect((): Observable<Action> => {
+    return this.actions$
+      .pipe(
+        ofType(TodoActions.editTodo),
+        switchMap((action) => {
+          return this.todoService.editTodo(action.id, action.title, action.status)
+            .pipe(
+              map((todo: ITodo) => TodoActions.todoEdited(todo)),
+              catchError((error) => of(TodoActions.errorEditTodo({ error }))),
+            );
+        }),
+      );
+  });
+
+  removeTodo$ = createEffect((): Observable<Action> => {
+    return this.actions$
+      .pipe(
+        ofType(TodoActions.removeTodo),
+        switchMap((action) => {
+          const id = action.id;
+
+          return this.todoService.removeTodo(id)
+            .pipe(
+              map(() => TodoActions.todoRemoved({ id })),
+              catchError((error) => of(TodoActions.errorRemoveTodo({ error }))),
+            );
+        }),
+      );
+  });
+
+  constructor(private actions$: Actions, private todoService: TodoService) {}
 }

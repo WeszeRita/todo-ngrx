@@ -1,14 +1,23 @@
 import { createAction, props } from '@ngrx/store';
 import { ITodo } from '../models/todo.model';
+import { RadioButton } from '../constants/radio-button.enum';
 
 export const enum TodoAction {
   loadTodos = '[Todos] Load todos',
   todosLoaded = '[Todos] Todos loaded',
-  errorLoadTodos = '[Todos] Error todos',
+  errorLoadTodos = '[Todos] Error during loading todos',     // one error action or one for any actionType?
 
   createTodo = '[Todo] Create new todo',
   todoCreated = '[Todo] New todo created',
-  errorTodo = '[Todo] Error during process',
+  errorTodo = '[Todo] Error during create todo',
+
+  editTodo = '[Todo] Edit a todo',
+  todoEdited = '[Todo] A todo edited',
+  errorEditTodo = '[Todo] Error during edit todo',
+
+  removeTodo = '[Todo] Remove product from cart',
+  todoRemoved = '[Todo] Product removed',
+  errorRemoveTodo = '[Todo] Error during remove todo',
 }
 
 export namespace TodoActions {
@@ -19,14 +28,12 @@ export namespace TodoActions {
   export const createTodo = createAction(TodoAction.createTodo, props<{ todo: ITodo }>());
   export const todoCreated = createAction(TodoAction.todoCreated, props<{ todo: ITodo }>());
   export const errorTodo = createAction(TodoAction.errorTodo, props<{ error: Error }>());
+
+  export const editTodo = createAction(TodoAction.editTodo, props<{ id: number, title: string, status: `${ RadioButton }` }>());
+  export const todoEdited = createAction(TodoAction.todoEdited, props<{ id: number, title: string, status: `${ RadioButton }` }>());
+  export const errorEditTodo = createAction(TodoAction.errorEditTodo, props<{ error: Error }>());
+
+  export const removeTodo = createAction(TodoAction.removeTodo, props<{ id: number }>());
+  export const todoRemoved = createAction(TodoAction.todoRemoved, props<{ id: number }>());
+  export const errorRemoveTodo = createAction(TodoAction.errorRemoveTodo, props<{ error: Error }>());
 }
-
-
-// TODO: question:
-// interface IPropsTodo {
-//   todo: ITodo
-// }
-//
-// ->
-//
-// props<{ IPropsTodo }>())

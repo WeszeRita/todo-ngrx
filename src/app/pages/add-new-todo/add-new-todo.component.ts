@@ -1,17 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { RadioButton } from '../../../constants/radioButton.enum';
+import { RadioButton} from '../../../constants/radio-button.enum';
 import { TodoFacadeService } from '../../../service/todo-facade.service';
+import { ITodo } from '../../../models/todo.model';
 
 @Component({
   selector: 'app-add-new-todo',
   templateUrl: './add-new-todo.component.html',
   styleUrls: ['./add-new-todo.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddNewTodoComponent  implements OnInit {
-  addNewTodoForm!: FormGroup;
+export class AddNewTodoComponent  implements OnInit, OnChanges {
+  protected readonly RadioButton = RadioButton;
+  addNewTodoForm: FormGroup;
+  @Input()
+  todo: ITodo;
+
+  get newTodoTitle() {
+    return this.addNewTodoForm.controls['title'];
+  }
 
   constructor(private todoFacadeService: TodoFacadeService) {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes['todo']) {
+      this.addNewTodoForm.setValue(this.todo);
+    }
+  }
 
   ngOnInit(): void {
     this.addNewTodoForm = new FormGroup({
@@ -20,15 +35,11 @@ export class AddNewTodoComponent  implements OnInit {
     })
   }
 
-  get newTodoTitle() {
-    return this.addNewTodoForm.controls['title'];
-  }
 
   onSubmit() {
-    const newTodo = { ...this.addNewTodoForm.value};
+    const newTodo = this.addNewTodoForm.value;
     this.todoFacadeService.createNewTodo(newTodo);
     this.addNewTodoForm.reset();
   }
 
-  protected readonly RadioButton = RadioButton;
 }
