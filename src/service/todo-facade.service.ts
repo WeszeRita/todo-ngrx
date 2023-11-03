@@ -27,8 +27,8 @@ export class TodoFacadeService {
     return this.store.select(TodoSelectors.selectTodoById(id));
   }
 
-  editTodo(id: number, title: string, status: `${ RadioButton }`): void {
-    this.store.dispatch(TodoActions.editTodo({ id, title, status }));
+  editTodo(todo: ITodo): void {
+    this.store.dispatch(TodoActions.editTodo({ todo }));
   }
 
   removeTodo(id: number): void {

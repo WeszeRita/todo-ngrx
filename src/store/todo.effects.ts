@@ -6,6 +6,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TodoService } from '../service/todo.service';
 import { TodoActions } from './todo.actions';
 import { ITodo } from '../models/todo.model';
+import todoEdited = TodoActions.todoEdited;
 
 @Injectable()
 export class TodoEffects {
@@ -41,10 +42,10 @@ export class TodoEffects {
     return this.actions$
       .pipe(
         ofType(TodoActions.editTodo),
-        switchMap((action) => {
-          return this.todoService.editTodo(action.id, action.title, action.status)
+        switchMap(({ todo }) => {
+          return this.todoService.editTodo( todo )
             .pipe(
-              map((todo: ITodo) => TodoActions.todoEdited(todo)),
+              map((todo: ITodo) => TodoActions.todoEdited({ todo })),
               catchError((error) => of(TodoActions.errorEditTodo({ error }))),
             );
         }),

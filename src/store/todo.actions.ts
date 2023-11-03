@@ -5,7 +5,7 @@ import { RadioButton } from '../constants/radio-button.enum';
 export const enum TodoAction {
   loadTodos = '[Todos] Load todos',
   todosLoaded = '[Todos] Todos loaded',
-  errorLoadTodos = '[Todos] Error during loading todos',     // one error action or one for any actionType?
+  errorLoadTodos = '[Todos] Error during loading todos',
 
   createTodo = '[Todo] Create new todo',
   todoCreated = '[Todo] New todo created',
@@ -15,8 +15,8 @@ export const enum TodoAction {
   todoEdited = '[Todo] A todo edited',
   errorEditTodo = '[Todo] Error during edit todo',
 
-  removeTodo = '[Todo] Remove product from cart',
-  todoRemoved = '[Todo] Product removed',
+  removeTodo = '[Todo] Remove todo from the list',
+  todoRemoved = '[Todo] Todo removed from the list',
   errorRemoveTodo = '[Todo] Error during remove todo',
 }
 
@@ -29,8 +29,8 @@ export namespace TodoActions {
   export const todoCreated = createAction(TodoAction.todoCreated, props<{ todo: ITodo }>());
   export const errorTodo = createAction(TodoAction.errorTodo, props<{ error: Error }>());
 
-  export const editTodo = createAction(TodoAction.editTodo, props<{ id: number, title: string, status: `${ RadioButton }` }>());
-  export const todoEdited = createAction(TodoAction.todoEdited, props<{ id: number, title: string, status: `${ RadioButton }` }>());
+  export const editTodo = createAction(TodoAction.editTodo, props<{ todo: ITodo }>());
+  export const todoEdited = createAction(TodoAction.todoEdited, props<{ todo: ITodo }>());
   export const errorEditTodo = createAction(TodoAction.errorEditTodo, props<{ error: Error }>());
 
   export const removeTodo = createAction(TodoAction.removeTodo, props<{ id: number }>());

@@ -3,7 +3,7 @@
 }
 
 .container {
-  @apply p-10 flex flex-wrap gap-3 m-auto;
+  @apply p-10 flex flex-wrap gap-3 m-auto justify-center;
 }
 
 .button {
@@ -15,7 +15,7 @@
 }
 
 .flip-card {
-  @apply w-80 h-48 perspective rounded-xl;
+  @apply w-full md:w-80 h-48 perspective rounded-xl;
 }
 
 .flip-card-inner {

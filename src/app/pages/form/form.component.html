@@ -1,9 +1,12 @@
 <div class="formContainer">
-    <h1 class="title">Add a new todo</h1>
+
+  <ng-container *ngIf="!isEditing; then addNewTodoTitle else editTodoTitle"></ng-container>
+  <ng-template #addNewTodoTitle><h1 class="title">Add a new todo</h1></ng-template>
+  <ng-template #editTodoTitle><h1 class="title">Edit todo</h1></ng-template>
 
     <form class="newTodoForm" [formGroup]="addNewTodoForm" (ngSubmit)="onSubmit()">
         <div>
-            <label class="red-asterisk" for="newTodo-title">New todo</label>
+            <label class="red-asterisk" for="newTodo-title">Todo</label>
 
             <input
                     id="newTodo-title"
@@ -45,6 +48,8 @@
 
         <span *ngIf="addNewTodoForm.invalid && addNewTodoForm.touched" class="text-red-600 block absolute">please, mark the status</span>
 
-        <button class="button button-new" [disabled]="addNewTodoForm.invalid" type="submit">add new todo</button>
+      <button [disabled]="addNewTodoForm.invalid" class="button" [ngClass]="isEditing ? 'button-update' : 'button-new'" type="submit">{{ buttonText }}</button>
+
+      <button *ngIf="isEditing" class="button button-cancel" [disabled]="addNewTodoForm.invalid" type="button" (click)="onCancel()">cancel</button>
     </form>
 </div>
