@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ITodo } from '../../../models/todo.model';
 import { TodoFacadeService } from '../../../service/todo-facade.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ButtonTitle } from '../../../constants/button-title.enum';
 
 @Component({
   selector: 'app-cards',
@@ -10,32 +11,33 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrls: ['./cards.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardsComponent {
+export class CardsComponent implements OnInit{
   todos$: Observable<ITodo[]>
 
-  @Output() selectedTodo: EventEmitter<ITodo> = new EventEmitter;
-  isEditing = false;
-  selectedTodoItem: ITodo;
+  @Output()
+  selectedTodo = new EventEmitter<ITodo>();
 
+  selectedTodoItem: ITodo;
 
   constructor(private todoFacadeService: TodoFacadeService, private destroyRef: DestroyRef) {}
 
+  ngOnInit(): void {
+    this.todoFacadeService.initTodos();
+    this.todos$ = this.todoFacadeService.getTodos();
+  }
+
   onEdit(todoId: number): void {
-    this.isEditing = true;
-
-
     this.todoFacadeService.getTodoById(todoId)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((todoItem) => {
         this.selectedTodoItem = todoItem;
-      })
+      });
     this.selectedTodo.emit(this.selectedTodoItem)
-    // this.todoFacadeService.editTodo(this.selectedTodo);
 
+    this.todoFacadeService.editTodo(this.selectedTodoItem);
   }
 
   onDeleteTodo(id: number): void {
     this.todoFacadeService.removeTodo(id);
   }
-
 }

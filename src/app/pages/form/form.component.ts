@@ -7,7 +7,7 @@ import {
   OnInit,
   SimpleChanges
 } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { RadioButton} from '../../../constants/radio-button.enum';
 import { TodoFacadeService } from '../../../service/todo-facade.service';
 import { ITodo } from '../../../models/todo.model';
@@ -21,18 +21,15 @@ import { ButtonTitle } from '../../../constants/button-title.enum';
 })
 export class FormComponent implements OnInit, OnChanges {
   protected readonly RadioButton = RadioButton;
+
   addNewTodoForm: FormGroup;
-  isEditing = true;
-  @Input()
-  buttonText: string;
+  isEditing = false;
+  buttonText = ButtonTitle.addNewTodo;
 
   @Input()
   selectedTodo: ITodo;
 
-  // @Input()
-  // isEditing: boolean;
-
-  get newTodoTitle() {
+  get newTodoTitle(): AbstractControl {
     return this.addNewTodoForm.controls['title'];
   }
 
@@ -42,12 +39,15 @@ export class FormComponent implements OnInit, OnChanges {
     if (!this.selectedTodo) {
       return;
     }
-  this.buttonText = ButtonTitle.isEditing;
-    if(changes['selectedTodo']) {
+
+    this.isEditing = true;
+    this.buttonText = ButtonTitle.isEditing;
+
+    if (changes['selectedTodo']) {
       this.addNewTodoForm.setValue({
         title: this.selectedTodo.title,
         status: this.selectedTodo.status,
-      })
+      });
     }
   }
 
@@ -59,7 +59,6 @@ export class FormComponent implements OnInit, OnChanges {
   }
 
   onSubmit() {
-    console.log(this.isEditing)
     if (!this.isEditing) {
       const todo = this.addNewTodoForm.value;
       this.todoFacadeService.createNewTodo(todo);
@@ -70,6 +69,7 @@ export class FormComponent implements OnInit, OnChanges {
         id: this.selectedTodo.id,
         ...this.addNewTodoForm.value
       };
+
       this.todoFacadeService.editTodo(todo);
       this.todoFacadeService.initTodos();
       this.isEditing = false;
@@ -84,7 +84,7 @@ export class FormComponent implements OnInit, OnChanges {
     })
   }
 
-  onCancel() {
+  onCancel(): void {
     this.isEditing = false;
     this.addNewTodoForm.reset();
     this.addNewTodoForm.setValue({
@@ -92,5 +92,4 @@ export class FormComponent implements OnInit, OnChanges {
       status: RadioButton.ongoing,
     })
   }
-
 }

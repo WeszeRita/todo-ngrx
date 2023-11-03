@@ -2,46 +2,10 @@
   @apply font-extrabold text-5xl m-10;
 }
 
-.container {
-  @apply p-10 flex flex-wrap gap-3 m-auto justify-center;
-}
-
 .button {
   @apply border border-black rounded p-2.5 m-2.5;
 }
 
 .button-new {
   @apply ml-10;
-}
-
-.flip-card {
-  @apply w-full md:w-80 h-48 perspective rounded-xl;
-}
-
-.flip-card-inner {
-  @apply relative w-full h-full text-center duration-200 preserve-3d;
-}
-
-.flip-card:hover .flip-card-inner {
-  @apply rotate-y-180;
-}
-
-.flip-card-front, .flip-card-back {
-  @apply absolute w-full h-full backface-hidden;
-}
-
-.flip-card-front {
-  @apply p-4 rounded-xl flex items-center justify-center bg-gradient-to-bl from-blue-300 to-green-400;
-}
-
-.flip-card-back {
-  @apply p-6 rounded-xl flex flex-col justify-between rotate-y-180 bg-gradient-to-bl from-pink-500 to-yellow-500;
-}
-
-.todo-title {
-  @apply text-2xl;
-}
-
-.status {
-  @apply block uppercase ;
 }
