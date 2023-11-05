@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ITodo } from '../models/todo.model';
 import { TodoFacadeService } from '../service/todo-facade.service';
-import { ButtonTitle } from '../constants/button-title.enum';
+import { ITodo } from '../models/todo.model';
 
 @Component({
   selector: 'app-root',

@@ -33,7 +33,7 @@ export class FormComponent implements OnInit, OnChanges {
     return this.addNewTodoForm.controls['title'];
   }
 
-  constructor(private todoFacadeService: TodoFacadeService, private cdr: ChangeDetectorRef) {}
+  constructor(private todoFacadeService: TodoFacadeService) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (!this.selectedTodo) {

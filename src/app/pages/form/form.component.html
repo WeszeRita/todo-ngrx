@@ -4,52 +4,65 @@
   <ng-template #addNewTodoTitle><h1 class="title">Add a new todo</h1></ng-template>
   <ng-template #editTodoTitle><h1 class="title">Edit todo</h1></ng-template>
 
-    <form class="newTodoForm" [formGroup]="addNewTodoForm" (ngSubmit)="onSubmit()">
-        <div>
-            <label class="red-asterisk" for="newTodo-title">Todo</label>
+  <form (ngSubmit)="onSubmit()" [formGroup]="addNewTodoForm" class="newTodoForm">
+    <label class="red-asterisk" for="newTodo-title">Todo</label>
 
-            <input
-                    id="newTodo-title"
-                    class="todo-input"
-                    [class.error]="newTodoTitle.invalid && newTodoTitle.touched"
-                    [placeholder]="'what are you going to do next...'"
-                    formControlName="title"
-                    type="text">
-            <span *ngIf="newTodoTitle.invalid && newTodoTitle.touched" class="error-message">please, write here the new todo</span>
-        </div>
+    <input
+      id="newTodo-title"
+      class="todo-input"
+      [class.error]="newTodoTitle.invalid && newTodoTitle.touched"
+      [placeholder]="'what are you going to do next...'"
+      formControlName="title"
+      type="text">
+    <span
+      *ngIf="newTodoTitle.invalid && newTodoTitle.touched"
+      class="error-message">
+      please, write here the new todo
+    </span>
 
-        <div>
-            <h3 class="new-todo-title red-asterisk">Status</h3>
-            <input
-                    id="'RadioButton.completed'"
-                    name="status"
-                    type="radio"
-                    formControlName="status"
-                    value="{{ RadioButton.completed }}">
-            <label for="'RadioButton.completed'">{{ RadioButton.completed }}</label><br>
+    <h3 class="new-todo-title red-asterisk">Status</h3>
+    <input
+      id="'RadioButton.completed'"
+      formControlName="status"
+      name="status"
+      type="radio"
+      value="{{ RadioButton.completed }}">
+    <label for="'RadioButton.completed'">{{ RadioButton.completed }}</label><br>
 
-            <input
-                    id="'RadioButton.ongoing'"
-                    name="status"
-                    type="radio"
-                    formControlName="status"
-                    value="{{ RadioButton.ongoing }}">
-            <label for="'RadioButton.ongoing'">{{ RadioButton.ongoing }}</label><br>
+    <input
+      id="'RadioButton.ongoing'"
+      formControlName="status"
+      name="status"
+      type="radio"
+      value="{{ RadioButton.ongoing }}">
+    <label for="'RadioButton.ongoing'">{{ RadioButton.ongoing }}</label><br>
 
-            <input
-                    id="'RadioButton.pending'"
-                    name="status"
-                    type="radio"
-                    formControlName="status"
-                    value="{{ RadioButton.pending }}">
+    <input
+      id="'RadioButton.pending'"
+      formControlName="status"
+      name="status"
+      type="radio"
+      value="{{ RadioButton.pending }}">
 
-            <label for="'RadioButton.pending'">{{ RadioButton.pending }}</label><br>
-        </div>
+    <label for="'RadioButton.pending'">{{ RadioButton.pending }}</label><br>
 
-        <span *ngIf="addNewTodoForm.invalid && addNewTodoForm.touched" class="text-red-600 block absolute">please, mark the status</span>
+    <span *ngIf="addNewTodoForm.invalid && addNewTodoForm.touched" class="text-red-600 block absolute">please, mark the status</span>
 
-      <button [disabled]="addNewTodoForm.invalid" class="button" [ngClass]="isEditing ? 'button-update' : 'button-new'" type="submit">{{ buttonText }}</button>
+    <button
+      class="button"
+      [ngClass]="isEditing ? 'button-update' : 'button-new'"
+      type="submit"
+      [disabled]="addNewTodoForm.invalid">
+      {{ buttonText }}
+    </button>
 
-      <button *ngIf="isEditing" class="button button-cancel" [disabled]="addNewTodoForm.invalid" type="button" (click)="onCancel()">cancel</button>
-    </form>
+    <button
+      *ngIf="isEditing"
+      class="button button-cancel"
+      type="button"
+      [disabled]="addNewTodoForm.invalid"
+      (click)="onCancel()">
+      cancel
+    </button>
+  </form>
 </div>

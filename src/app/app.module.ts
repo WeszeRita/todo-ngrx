@@ -1,4 +1,5 @@
 import { NgModule, isDevMode } from '@angular/core';
+import { todoReducer } from '../store/todo.reducer';
 import { BrowserModule } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
 import { HttpClientModule } from '@angular/common/http';
@@ -8,10 +9,8 @@ import { AppComponent } from './app.component';
 import { TodoService } from '../service/todo.service';
 import { FormComponent } from './pages/form/form.component';
 import { TodoFacadeService } from '../service/todo-facade.service';
-import { todoReducer } from '../store/todo.reducer';
 import { TodoEffects } from '../store/todo.effects';
 import { todoFeatureKey } from '../store/todo.selectors';
-import { NgOptimizedImage } from '@angular/common';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { CardsComponent } from './pages/cards/cards.component';
 
@@ -28,7 +27,6 @@ import { CardsComponent } from './pages/cards/cards.component';
     EffectsModule.forRoot([TodoEffects]),
     StoreModule.forRoot({}, {}),
     StoreModule.forFeature(todoFeatureKey, todoReducer),
-    NgOptimizedImage,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [TodoService, TodoFacadeService],
