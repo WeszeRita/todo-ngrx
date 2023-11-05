@@ -3,7 +3,7 @@
 }
 
 .error-message {
-  @apply block absolute text-red-600;
+  @apply block absolute text-red-600 text-sm;
 }
 
 .formContainer {
@@ -23,7 +23,7 @@
 }
 
 .new-todo-title {
-  @apply mt-3;
+  @apply mt-5;
 }
 
 .newTodoForm {

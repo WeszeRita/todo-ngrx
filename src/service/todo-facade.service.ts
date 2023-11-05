@@ -4,7 +4,6 @@ import { ITodo } from '../models/todo.model';
 import { TodoActions } from '../store/todo.actions';
 import { filter, Observable } from 'rxjs';
 import { TodoSelectors } from '../store/todo.selectors';
-import { RadioButton } from '../constants/radio-button.enum';
 
 @Injectable()
 export class TodoFacadeService {

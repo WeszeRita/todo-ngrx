@@ -1,7 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { ITodo } from '../models/todo.model';
 import { TodoActions } from './todo.actions';
-import errorLoadTodos = TodoActions.errorLoadTodos;
 
 export interface ITodoState {
   todos: ITodo[];

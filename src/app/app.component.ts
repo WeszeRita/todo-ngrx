@@ -9,18 +9,18 @@ import { ITodo } from '../models/todo.model';
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit{
-  todos$: Observable<ITodo[]>
+export class AppComponent{
+  // todos$: Observable<ITodo[]>
   // selectedTodo: ITodo;
   // isEditing = false;
   // buttonText = ButtonTitle.addNewTodo;
 
-  constructor(private todoFacadeService: TodoFacadeService) {}
+  // constructor(private todoFacadeService: TodoFacadeService) {}
 
-  ngOnInit(): void {
-    this.todoFacadeService.initTodos();
-    this.todos$ = this.todoFacadeService.getTodos();
-  }
+  // ngOnInit(): void {
+  //   this.todoFacadeService.initTodos();
+  //   this.todos$ = this.todoFacadeService.getTodos();
+  // }
 
   // onEdit(todoId: number): void {
   //   this.isEditing = true;

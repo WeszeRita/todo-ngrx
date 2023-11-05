@@ -34,7 +34,7 @@ export class FormComponent implements OnInit, OnChanges {
 
   constructor(private todoFacadeService: TodoFacadeService) {}
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (!this.selectedTodo) {
       return;
     }
@@ -57,7 +57,7 @@ export class FormComponent implements OnInit, OnChanges {
     })
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (!this.isEditing) {
       const todo = this.addNewTodoForm.value;
       this.todoFacadeService.createNewTodo(todo);

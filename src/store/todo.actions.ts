@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store';
 import { ITodo } from '../models/todo.model';
-import { RadioButton } from '../constants/radio-button.enum';
 
 export const enum TodoAction {
   loadTodos = '[Todos] Load todos',

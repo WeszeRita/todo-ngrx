@@ -46,7 +46,7 @@
 
     <label for="'RadioButton.pending'">{{ RadioButton.pending }}</label><br>
 
-    <span *ngIf="addNewTodoForm.invalid && addNewTodoForm.touched" class="text-red-600 block absolute">please, mark the status</span>
+    <span *ngIf="addNewTodoForm.invalid && addNewTodoForm.touched" class="error-message">please, mark the status</span>
 
     <button
       class="button"

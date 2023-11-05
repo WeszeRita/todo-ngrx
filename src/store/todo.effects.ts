@@ -6,7 +6,6 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TodoService } from '../service/todo.service';
 import { TodoActions } from './todo.actions';
 import { ITodo } from '../models/todo.model';
-import todoEdited = TodoActions.todoEdited;
 
 @Injectable()
 export class TodoEffects {
