@@ -2,18 +2,18 @@
   "todos": [
     {
       "id": 1,
-      "title": "4ztfug",
+      "title": "buy a dog",
       "status": "completed"
     },
     {
       "id": 2,
-      "title": "install ngrx store",
+      "title": "buy a cat",
       "status": "completed"
     },
     {
       "id": 3,
-      "title": "install ngrx effectsretgzgnh",
-      "status": "ongoing"
+      "title": "don't let the dog meet the cat",
+      "status": "completed"
     }
   ]
 }
