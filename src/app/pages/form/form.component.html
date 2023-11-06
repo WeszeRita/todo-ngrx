@@ -49,10 +49,10 @@
     <span *ngIf="addNewTodoForm.invalid && addNewTodoForm.touched" class="error-message">please, mark the status</span>
 
     <button
-      class="button"
+      class="button disabled:bg-grey-600"
       [ngClass]="isEditing ? 'button-update' : 'button-new'"
       type="submit"
-      [disabled]="addNewTodoForm.invalid">
+      [disabled]="addNewTodoForm.invalid && !addNewTodoForm.touched">
       {{ buttonText }}
     </button>
 

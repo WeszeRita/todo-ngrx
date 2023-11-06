@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  EventEmitter,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 import { ITodo } from '../../../models/todo.model';
 import { TodoFacadeService } from '../../../service/todo-facade.service';
@@ -31,7 +38,6 @@ export class CardsComponent implements OnInit{
       .subscribe((todoItem) => {
         this.selectedTodoItem = todoItem;
       });
-    this.todoFacadeService.editTodo(this.selectedTodoItem);
     this.selectedTodo.emit(this.selectedTodoItem);
   }
 

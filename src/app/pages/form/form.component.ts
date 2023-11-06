@@ -84,7 +84,6 @@ export class FormComponent implements OnInit, OnChanges {
   }
 
   resetForm(): void {
-    console.log(this.addNewTodoForm.value)
     this.isEditing = false;
     this.buttonText = ButtonTitle.addNewTodo;
     this.addNewTodoForm.reset();
