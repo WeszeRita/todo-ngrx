@@ -14,10 +14,9 @@ export class CardsComponent implements OnInit{
   @Output()
   selectedTodo = new EventEmitter<ITodo>();
 
-  todos$: Observable<ITodo[]>
+  todos$: Observable<ITodo[]>;
 
   selectedTodoItem: ITodo;
-  isEditing = false;
 
   constructor(private todoFacadeService: TodoFacadeService, private destroyRef: DestroyRef) {}
 
@@ -32,10 +31,8 @@ export class CardsComponent implements OnInit{
       .subscribe((todoItem) => {
         this.selectedTodoItem = todoItem;
       });
-    this.selectedTodo.emit(this.selectedTodoItem)
-
     this.todoFacadeService.editTodo(this.selectedTodoItem);
-    console.log('cards:', this.selectedTodoItem )
+    this.selectedTodo.emit(this.selectedTodoItem);
   }
 
   onDeleteTodo(id: number): void {

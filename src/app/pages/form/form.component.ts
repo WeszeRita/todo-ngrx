@@ -1,5 +1,5 @@
 import {
-  ChangeDetectionStrategy,
+  ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
   Input,
   OnChanges,
@@ -19,20 +19,20 @@ import { ButtonTitle } from '../../../constants/button-title.enum';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormComponent implements OnInit, OnChanges {
-  protected readonly RadioButton = RadioButton;
-
-  addNewTodoForm: FormGroup;
-  isEditing = false;
-  buttonText = ButtonTitle.addNewTodo;
-
   @Input()
   selectedTodo: ITodo;
+
+  buttonText = ButtonTitle.addNewTodo;
+  addNewTodoForm: FormGroup;
+  isEditing = false;
+
+  protected readonly RadioButton = RadioButton;
 
   get newTodoTitle(): AbstractControl {
     return this.addNewTodoForm.controls['title'];
   }
 
-  constructor(private todoFacadeService: TodoFacadeService) {}
+  constructor(private todoFacadeService: TodoFacadeService, private cdr: ChangeDetectorRef) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.selectedTodo) {
@@ -41,6 +41,7 @@ export class FormComponent implements OnInit, OnChanges {
 
     this.isEditing = true;
     this.buttonText = ButtonTitle.isEditing;
+    this.cdr.detectChanges();
 
     if (changes['selectedTodo']) {
       this.addNewTodoForm.setValue({
@@ -75,16 +76,17 @@ export class FormComponent implements OnInit, OnChanges {
       this.addNewTodoForm.reset();
     }
 
-    this.isEditing = false;
-    this.addNewTodoForm.reset();
-    this.addNewTodoForm.setValue({
-      title: null,
-      status: RadioButton.ongoing,
-    })
+    this.resetForm();
   }
 
   onCancel(): void {
+   this.resetForm();
+  }
+
+  resetForm(): void {
     this.isEditing = false;
+    this.buttonText = ButtonTitle.addNewTodo;
+    this.cdr.detectChanges();
     this.addNewTodoForm.reset();
     this.addNewTodoForm.setValue({
       title: null,

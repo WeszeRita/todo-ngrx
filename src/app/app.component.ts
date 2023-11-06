@@ -1,6 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { TodoFacadeService } from '../service/todo-facade.service';
+import { ChangeDetectionStrategy, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ITodo } from '../models/todo.model';
 
 @Component({
@@ -10,32 +8,9 @@ import { ITodo } from '../models/todo.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent{
-  // todos$: Observable<ITodo[]>
-  // selectedTodo: ITodo;
-  // isEditing = false;
-  // buttonText = ButtonTitle.addNewTodo;
+  selectedTodo: ITodo;
 
-  // constructor(private todoFacadeService: TodoFacadeService) {}
-
-  // ngOnInit(): void {
-  //   this.todoFacadeService.initTodos();
-  //   this.todos$ = this.todoFacadeService.getTodos();
-  // }
-
-  // onEdit(todoId: number): void {
-  //   this.isEditing = true;
-  //
-  //   this.todoFacadeService.getTodoById(todoId)
-  //     .pipe(takeUntilDestroyed(this.destroyRef))
-  //     .subscribe((todoItem) => {
-  //       this.selectedTodo = todoItem;
-  //     })
-  //
-  //   this.todoFacadeService.editTodo(this.selectedTodo);
-  //
-  // }
-  //
-  // onDeleteTodo(id: number): void {
-  //   this.todoFacadeService.removeTodo(id);
-  // }
+  selectedTodoEmitted(todo: ITodo) {
+    this.selectedTodo = todo;
+  }
 }
