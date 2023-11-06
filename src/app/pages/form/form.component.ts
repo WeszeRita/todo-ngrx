@@ -84,13 +84,14 @@ export class FormComponent implements OnInit, OnChanges {
   }
 
   resetForm(): void {
+    console.log(this.addNewTodoForm.value)
     this.isEditing = false;
     this.buttonText = ButtonTitle.addNewTodo;
-    this.cdr.detectChanges();
     this.addNewTodoForm.reset();
     this.addNewTodoForm.setValue({
       title: null,
       status: RadioButton.ongoing,
     })
+    this.cdr.detectChanges();
   }
 }
