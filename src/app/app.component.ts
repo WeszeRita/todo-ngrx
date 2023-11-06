@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ITodo } from '../models/todo.model';
 
 @Component({
