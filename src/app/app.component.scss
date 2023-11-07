@@ -9,3 +9,11 @@
 .button-new {
   @apply ml-10;
 }
+
+.container {
+  @apply flex flex-wrap justify-center gap-3 m-auto p-10;
+}
+
+.flip-card {
+  @apply w-full md:w-80 h-48 perspective rounded-xl;
+}

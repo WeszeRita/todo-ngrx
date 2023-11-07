@@ -1,13 +1,13 @@
 import {
   ChangeDetectionStrategy, ChangeDetectorRef,
-  Component,
+  Component, EventEmitter,
   Input,
   OnChanges,
-  OnInit,
+  OnInit, Output,
   SimpleChanges
 } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { RadioButton} from '../../../constants/radio-button.enum';
+import { RadioButton } from '../../../constants/radio-button.enum';
 import { TodoFacadeService } from '../../../service/todo-facade.service';
 import { ITodo } from '../../../models/todo.model';
 import { ButtonTitle } from '../../../constants/button-title.enum';
@@ -22,6 +22,12 @@ export class FormComponent implements OnInit, OnChanges {
   @Input()
   selectedTodo: ITodo;
 
+  @Input()
+  isCancelledOnCard: boolean;
+
+  @Output()
+  onCancelled = new EventEmitter<boolean>();
+
   buttonText = ButtonTitle.addNewTodo;
   addNewTodoForm: FormGroup;
   isEditing = false;
@@ -32,11 +38,22 @@ export class FormComponent implements OnInit, OnChanges {
     return this.addNewTodoForm.controls['title'];
   }
 
-  constructor(private todoFacadeService: TodoFacadeService, private cdr: ChangeDetectorRef) {}
+  constructor(private todoFacadeService: TodoFacadeService, private cdr: ChangeDetectorRef) {
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.selectedTodo) {
       return;
+    }
+
+    if (this.isCancelledOnCard) {
+      if (this.isEditing) {
+        this.isEditing = false;
+        this.buttonText = ButtonTitle.addNewTodo;
+        this.resetForm();
+        this.cdr.detectChanges();
+        return;
+      }
     }
 
     this.isEditing = true;
@@ -55,7 +72,7 @@ export class FormComponent implements OnInit, OnChanges {
     this.addNewTodoForm = new FormGroup({
       title: new FormControl(null, Validators.required),
       status: new FormControl(RadioButton.ongoing, Validators.required),
-    })
+    });
   }
 
   onSubmit(): void {
@@ -75,12 +92,12 @@ export class FormComponent implements OnInit, OnChanges {
       this.isEditing = false;
       this.addNewTodoForm.reset();
     }
-
     this.resetForm();
   }
 
   onCancel(): void {
-   this.resetForm();
+    this.resetForm();
+    this.onCancelled.emit(true);
   }
 
   resetForm(): void {
@@ -90,7 +107,8 @@ export class FormComponent implements OnInit, OnChanges {
     this.addNewTodoForm.setValue({
       title: null,
       status: RadioButton.ongoing,
-    })
+    });
     this.cdr.detectChanges();
   }
+
 }

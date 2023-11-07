@@ -1,7 +1,3 @@
-.container {
-  @apply flex flex-wrap justify-center gap-3 m-auto p-10;
-}
-
 .flip-card {
   @apply w-full md:w-80 h-48 perspective rounded-xl;
 }
@@ -36,4 +32,8 @@
 
 .button {
   @apply border border-black rounded p-2.5 m-2.5;
+}
+
+.selected {
+  @apply bg-gradient-to-bl from-gray-300 to-gray-600;
 }

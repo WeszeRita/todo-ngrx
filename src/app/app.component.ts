@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ITodo } from '../models/todo.model';
+import { TodoFacadeService } from '../service/todo-facade.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +9,30 @@ import { ITodo } from '../models/todo.model';
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent{
+export class AppComponent implements OnInit {
   selectedTodo: ITodo;
+  isCancelled: boolean;
+  todos$: Observable<ITodo[]>;
+  isCancelledOnCard: boolean;
+
+  constructor(private todoFacadeService: TodoFacadeService) {
+  }
+
+  ngOnInit(): void {
+    this.todoFacadeService.initTodos();
+    this.todos$ = this.todoFacadeService.getTodos();
+  }
 
   selectedTodoEmitted(todo: ITodo) {
     this.selectedTodo = todo;
   }
+
+  onCancelled() {
+    this.isCancelled = true;
+  }
+
+  cancelOnCardEmitted() {
+    this.isCancelledOnCard = true;
+  }
+
 }

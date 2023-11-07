@@ -1,8 +1,5 @@
 <div class="formContainer">
-
-  <ng-container *ngIf="!isEditing; then addNewTodoTitle else editTodoTitle"></ng-container>
-  <ng-template #addNewTodoTitle><h1 class="title">Add a new todo</h1></ng-template>
-  <ng-template #editTodoTitle><h1 class="title">Edit todo</h1></ng-template>
+  <span class="title">{{ isEditing ? 'Edit Todo' : 'New Todo' }}</span>
 
   <form (ngSubmit)="onSubmit()" [formGroup]="addNewTodoForm" class="newTodoForm">
     <label class="red-asterisk" for="newTodo-title">Todo</label>
@@ -21,6 +18,7 @@
     </span>
 
     <h3 class="new-todo-title red-asterisk">Status</h3>
+
     <input
       id="'RadioButton.completed'"
       formControlName="status"
@@ -43,7 +41,6 @@
       name="status"
       type="radio"
       value="{{ RadioButton.pending }}">
-
     <label for="'RadioButton.pending'">{{ RadioButton.pending }}</label><br>
 
     <span *ngIf="addNewTodoForm.invalid && addNewTodoForm.touched" class="error-message">please, mark the status</span>

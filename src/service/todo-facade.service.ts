@@ -22,10 +22,6 @@ export class TodoFacadeService {
       .pipe(filter(Boolean));
   }
 
-  getTodoById(id: number): Observable<ITodo> {
-    return this.store.select(TodoSelectors.selectTodoById(id));
-  }
-
   editTodo(todo: ITodo): void {
     this.store.dispatch(TodoActions.editTodo({ todo }));
   }

@@ -1,7 +1,15 @@
 <h1 class="title">Todo list</h1>
 
-<app-form [selectedTodo]="selectedTodo"></app-form>
+<app-form [selectedTodo]="selectedTodo" [isCancelledOnCard]="isCancelledOnCard" (onCancelled)="onCancelled()"></app-form>
 
-<app-cards (selectedTodo)="selectedTodoEmitted($event)"></app-cards>
+<div class="container">
+  <app-card
+    *ngFor="let todo of todos$ | async"
+    (selectedTodo)="selectedTodoEmitted($event)"
+    (cancelOnCard)="cancelOnCardEmitted()"
+    [isCancelled]="isCancelled"
+    [todo]="todo">
+  </app-card>
+</div>
 
 

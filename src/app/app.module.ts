@@ -12,13 +12,13 @@ import { TodoFacadeService } from '../service/todo-facade.service';
 import { TodoEffects } from '../store/todo.effects';
 import { todoFeatureKey } from '../store/todo.selectors';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { CardsComponent } from './pages/cards/cards.component';
+import { CardComponent } from './pages/cards/card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormComponent,
-    CardsComponent,
+    CardComponent,
   ],
   imports: [
     BrowserModule,
