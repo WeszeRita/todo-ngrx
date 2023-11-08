@@ -12,8 +12,8 @@ export namespace TodoSelectors {
     (state: ITodoState) => state.todos,
   );
 
-  export const selectTodoById = (todoId: number)  =>  createSelector(
-    selectTodos,
-    (todos: ITodo[]) => todos.find((todo) => todo.id === todoId)
-  );
+  // export const selectTodoById = (todoId: number)  =>  createSelector(
+  //   selectTodos,
+  //   (todos: ITodo[]) => todos.find((todo) => todo.id === todoId)
+  // );
 }

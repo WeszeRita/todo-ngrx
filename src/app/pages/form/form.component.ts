@@ -1,10 +1,7 @@
 import {
   ChangeDetectionStrategy, ChangeDetectorRef,
-  Component, EventEmitter,
-  Input,
-  OnChanges,
-  OnInit, Output,
-  SimpleChanges
+  Component,
+  OnInit,
 } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { RadioButton } from '../../../constants/radio-button.enum';
@@ -18,15 +15,15 @@ import { ButtonTitle } from '../../../constants/button-title.enum';
   styleUrls: ['./form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormComponent implements OnInit, OnChanges {
-  @Input()
-  selectedTodo: ITodo;
-
-  @Input()
-  isCancelledOnCard: boolean;
-
-  @Output()
-  onCancelled = new EventEmitter<boolean>();
+export class FormComponent implements OnInit {
+  // @Input()
+  // selectedTodo: ITodo;
+  //
+  // @Input()
+  // isCancelledOnCard: boolean;
+  //
+  // @Output()
+  // onCancelled = new EventEmitter<boolean>();
 
   buttonText = ButtonTitle.addNewTodo;
   addNewTodoForm: FormGroup;
@@ -41,32 +38,32 @@ export class FormComponent implements OnInit, OnChanges {
   constructor(private todoFacadeService: TodoFacadeService, private cdr: ChangeDetectorRef) {
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (!this.selectedTodo) {
-      return;
-    }
+  // ngOnChanges(changes: SimpleChanges): void {
+    // if (!this.selectedTodo) {
+    //   return;
+    // }
 
-    if (this.isCancelledOnCard) {
-      if (this.isEditing) {
-        this.isEditing = false;
-        this.buttonText = ButtonTitle.addNewTodo;
-        this.resetForm();
-        this.cdr.detectChanges();
-        return;
-      }
-    }
+    // if (this.isCancelledOnCard) {
+    //   if (this.isEditing) {
+    //     this.isEditing = false;
+    //     this.buttonText = ButtonTitle.addNewTodo;
+    //     this.resetForm();
+    //     this.cdr.detectChanges();
+    //     return;
+    //   }
+    // }
 
-    this.isEditing = true;
-    this.buttonText = ButtonTitle.isEditing;
-    this.cdr.detectChanges();
+    // this.isEditing = true;
+    // this.buttonText = ButtonTitle.isEditing;
+    // this.cdr.detectChanges();
 
-    if (changes['selectedTodo']) {
-      this.addNewTodoForm.setValue({
-        title: this.selectedTodo.title,
-        status: this.selectedTodo.status,
-      });
-    }
-  }
+    // if (changes['selectedTodo']) {
+    //   this.addNewTodoForm.setValue({
+    //     title: this.selectedTodo.title,
+    //     status: this.selectedTodo.status,
+    //   });
+    // }
+  // }
 
   ngOnInit(): void {
     this.addNewTodoForm = new FormGroup({
@@ -76,39 +73,25 @@ export class FormComponent implements OnInit, OnChanges {
   }
 
   onSubmit(): void {
-    if (!this.isEditing) {
-      const todo = this.addNewTodoForm.value;
-      this.todoFacadeService.createNewTodo(todo);
-    }
-
-    if (this.isEditing) {
-      const todo = {
-        id: this.selectedTodo.id,
-        ...this.addNewTodoForm.value
-      };
-
-      this.todoFacadeService.editTodo(todo);
-      this.todoFacadeService.initTodos();
-      this.isEditing = false;
-      this.addNewTodoForm.reset();
-    }
+    const todo = this.addNewTodoForm.value;
+    this.todoFacadeService.createNewTodo(todo);
     this.resetForm();
   }
 
   onCancel(): void {
-    this.resetForm();
-    this.onCancelled.emit(true);
+  //   this.resetForm();
+  //   this.onCancelled.emit(true);
   }
 
   resetForm(): void {
     this.isEditing = false;
     this.buttonText = ButtonTitle.addNewTodo;
+    this.cdr.detectChanges();
     this.addNewTodoForm.reset();
     this.addNewTodoForm.setValue({
       title: null,
       status: RadioButton.ongoing,
     });
-    this.cdr.detectChanges();
   }
 
 }

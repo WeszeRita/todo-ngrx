@@ -10,10 +10,10 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  selectedTodo: ITodo;
-  isCancelled: boolean;
+  // selectedTodo: ITodo;
+  // isCancelled: boolean;
   todos$: Observable<ITodo[]>;
-  isCancelledOnCard: boolean;
+  // isCancelledOnCard: boolean;
 
   constructor(private todoFacadeService: TodoFacadeService) {
   }
@@ -23,16 +23,16 @@ export class AppComponent implements OnInit {
     this.todos$ = this.todoFacadeService.getTodos();
   }
 
-  selectedTodoEmitted(todo: ITodo) {
-    this.selectedTodo = todo;
-  }
-
-  onCancelled() {
-    this.isCancelled = true;
-  }
-
-  cancelOnCardEmitted() {
-    this.isCancelledOnCard = true;
-  }
+  // selectedTodoEmitted(todo: ITodo) {
+  //   this.selectedTodo = todo;
+  // }
+  //
+  // onCancelled() {
+  //   this.isCancelled = true;
+  // }
+  //
+  // cancelOnCardEmitted() {
+  //   this.isCancelledOnCard = true;
+  // }
 
 }

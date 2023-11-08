@@ -37,3 +37,12 @@
 .selected {
   @apply bg-gradient-to-bl from-gray-300 to-gray-600;
 }
+
+.button-edit img {
+  @apply w-5;
+}
+
+.button-delete img {
+  @apply w-5 h-5;
+}
+
