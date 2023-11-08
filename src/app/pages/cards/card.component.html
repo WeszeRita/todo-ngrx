@@ -10,7 +10,7 @@
         <span class="status">{{ todo.status }}</span>
 
         <div>
-          <button class="button button-edit" (click)="toggleEdit()">
+          <button class="button button-edit" (click)="toggleEdit(todo.id)">
             <img src="assets/icons/edit.svg" alt="edit todo icon">
           </button>
 

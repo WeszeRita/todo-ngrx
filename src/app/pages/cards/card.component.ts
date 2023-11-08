@@ -19,7 +19,9 @@ export class CardComponent {
   constructor(private todoFacadeService: TodoFacadeService) {
   }
 
-  toggleEdit(): void {
+  toggleEdit(id: number): void {
+    console.log('edit button', id);
+    this.todoFacadeService.selectTotoId(id);
   }
 
   onDeleteTodo(id: number): void {

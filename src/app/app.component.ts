@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.todoFacadeService.initTodos();
+    this.todoFacadeService.initTodos();         // TODO: move to the card comp? (+rename the action)
     this.todos$ = this.todoFacadeService.getTodos();
   }
 

@@ -26,6 +26,10 @@ export class TodoFacadeService {
     this.store.dispatch(TodoActions.editTodo({ todo }));
   }
 
+  selectTotoId (id: number): void {
+    this.store.dispatch(TodoActions.selectTodoId({ id }))
+  }
+
   removeTodo(id: number): void {
     this.store.dispatch(TodoActions.removeTodo({ id }));
   }

@@ -2,21 +2,25 @@ import { createAction, props } from '@ngrx/store';
 import { ITodo } from '../models/todo.model';
 
 export const enum TodoAction {
-  loadTodos = '[Todos] Load todos',
-  todosLoaded = '[Todos] Todos loaded',
-  errorLoadTodos = '[Todos] Error during loading todos',
+  loadTodos = '[App] Load todos',
+  todosLoaded = '[App] Todos loaded',
+  errorLoadTodos = '[App] Error during loading todos',
 
-  createTodo = '[Todo] Create new todo',
-  todoCreated = '[Todo] New todo created',
-  errorTodo = '[Todo] Error during create todo',
+  createTodo = '[Form] Create new todo',
+  todoCreated = '[Form] New todo created',
+  errorCreateTodo = '[Form] Error during create todo',
 
-  editTodo = '[Todo] Edit a todo',
-  todoEdited = '[Todo] A todo edited',
-  errorEditTodo = '[Todo] Error during edit todo',
+  selectTodoId = '[Card] Select todoId',
+  todoIdSelected = '[Card] todoId selected',
+  // errorSelectTodoId = '[Todo] Error during select todoId',     don't need it, there is no http request?
 
-  removeTodo = '[Todo] Remove todo from the list',
-  todoRemoved = '[Todo] Todo removed from the list',
-  errorRemoveTodo = '[Todo] Error during remove todo',
+  editTodo = '[Form] Edit a todo',
+  todoEdited = '[Form] A todo edited',
+  errorEditTodo = '[Form] Error during edit todo',
+
+  removeTodo = '[Card] Remove todo from the list',
+  todoRemoved = '[Card] Todo removed from the list',
+  errorRemoveTodo = '[Card] Error during remove todo',
 }
 
 export namespace TodoActions {
@@ -26,7 +30,10 @@ export namespace TodoActions {
 
   export const createTodo = createAction(TodoAction.createTodo, props<{ todo: ITodo }>());
   export const todoCreated = createAction(TodoAction.todoCreated, props<{ todo: ITodo }>());
-  export const errorTodo = createAction(TodoAction.errorTodo, props<{ error: Error }>());
+  export const errorTodo = createAction(TodoAction.errorCreateTodo, props<{ error: Error }>());
+
+  export const selectTodoId = createAction(TodoAction.selectTodoId, props<{ id: number }>());
+  export const TodoIdSelected = createAction(TodoAction.todoIdSelected, props<{ id: number }>());
 
   export const editTodo = createAction(TodoAction.editTodo, props<{ todo: ITodo }>());
   export const todoEdited = createAction(TodoAction.todoEdited, props<{ todo: ITodo }>());

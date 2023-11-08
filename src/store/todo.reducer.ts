@@ -4,11 +4,13 @@ import { TodoActions } from './todo.actions';
 
 export interface ITodoState {
   todos: ITodo[];
+  editingID: number;
   error: Error;
 }
 
 export const initialState: ITodoState = {
   todos: undefined,
+  editingID: undefined,
   error: undefined,
 }
 
@@ -21,6 +23,10 @@ export const todoReducer = createReducer(
   on(TodoActions.todoCreated, (state, action) => ({
     ...state,
     todos: [...(state.todos), action.todo],
+  })),
+  on(TodoActions.selectTodoId, (state, action) => ({
+    ...state,
+    editingID: action.id,
   })),
   on(TodoActions.todoRemoved, (state, action) => ({
       ...state,
