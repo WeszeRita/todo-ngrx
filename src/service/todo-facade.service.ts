@@ -22,12 +22,16 @@ export class TodoFacadeService {
       .pipe(filter(Boolean));
   }
 
+  getEditingTodoId(): Observable<number> {
+    return this.store.select(TodoSelectors.editingId);
+  }
+
   editTodo(todo: ITodo): void {
     this.store.dispatch(TodoActions.editTodo({ todo }));
   }
 
-  selectTotoId (id: number): void {
-    this.store.dispatch(TodoActions.selectTodoId({ id }))
+  selectTotoId (id: number) {
+   return this.store.dispatch(TodoActions.selectTodoId({ id }))
   }
 
   removeTodo(id: number): void {

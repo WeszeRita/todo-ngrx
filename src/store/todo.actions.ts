@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { ITodo } from '../models/todo.model';
 
 export const enum TodoAction {
-  loadTodos = '[App] Load todos',
+  loadTodos = '[App] Load todos',           // inside [] - module name or component name?
   todosLoaded = '[App] Todos loaded',
   errorLoadTodos = '[App] Error during loading todos',
 
@@ -11,7 +11,7 @@ export const enum TodoAction {
   errorCreateTodo = '[Form] Error during create todo',
 
   selectTodoId = '[Card] Select todoId',
-  todoIdSelected = '[Card] todoId selected',
+  // todoIdSelected = '[Card] todoId selected',
   // errorSelectTodoId = '[Todo] Error during select todoId',     don't need it, there is no http request?
 
   editTodo = '[Form] Edit a todo',
@@ -33,7 +33,7 @@ export namespace TodoActions {
   export const errorTodo = createAction(TodoAction.errorCreateTodo, props<{ error: Error }>());
 
   export const selectTodoId = createAction(TodoAction.selectTodoId, props<{ id: number }>());
-  export const TodoIdSelected = createAction(TodoAction.todoIdSelected, props<{ id: number }>());
+  // export const TodoIdSelected = createAction(TodoAction.todoIdSelected, props<{ id: number }>());
 
   export const editTodo = createAction(TodoAction.editTodo, props<{ todo: ITodo }>());
   export const todoEdited = createAction(TodoAction.todoEdited, props<{ todo: ITodo }>());

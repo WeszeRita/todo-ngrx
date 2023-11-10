@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ITodo } from '../models/todo.model';
 import { TodoFacadeService } from '../service/todo-facade.service';
 import { Observable } from 'rxjs';
@@ -9,11 +9,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit {
-  // selectedTodo: ITodo;
-  // isCancelled: boolean;
+export class AppComponent implements OnInit{
   todos$: Observable<ITodo[]>;
-  // isCancelledOnCard: boolean;
 
   constructor(private todoFacadeService: TodoFacadeService) {
   }
