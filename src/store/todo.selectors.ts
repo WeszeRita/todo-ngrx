@@ -1,12 +1,11 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ITodoState } from './todo.reducer';
+import { ITodo } from '../models/todo.model';
 
 export const todoFeatureKey = 'todo';
-export const editingIdFeatureKey = 'editingId';
 
 export namespace TodoSelectors {
   const selectTodoFeature = createFeatureSelector<ITodoState>(todoFeatureKey);
-  const editingIdFeature = createFeatureSelector<ITodoState>(editingIdFeatureKey);
 
   export const selectTodos = createSelector(
     selectTodoFeature,
@@ -14,8 +13,18 @@ export namespace TodoSelectors {
   );
 
   export const editingId = createSelector(
-    editingIdFeature,
-    (state: ITodoState) => state.editingId,
+    selectTodoFeature,
+    (state: ITodoState) => state.selectedId,
   );
 
+  export const selectTodoById = (todoId: number)  =>  createSelector(
+    selectTodos,
+    (todos: ITodo[]) => {
+      if (!todos) {
+        return undefined;
+      }
+
+      return todos.find((todo) => todo.id === todoId);
+    }
+  );
 }

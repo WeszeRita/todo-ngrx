@@ -26,6 +26,10 @@ export class TodoFacadeService {
     return this.store.select(TodoSelectors.editingId);
   }
 
+  getSelectedTodo(id: number): Observable<ITodo> {
+    return this.store.select(TodoSelectors.selectTodoById(id));
+  }
+
   editTodo(todo: ITodo): void {
     this.store.dispatch(TodoActions.editTodo({ todo }));
   }

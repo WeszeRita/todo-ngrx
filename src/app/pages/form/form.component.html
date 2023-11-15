@@ -1,6 +1,6 @@
 <div class="formContainer">
   <span class="title">{{ isEditing ? 'Edit Todo' : 'New Todo' }}</span>
-
+{{ isEditing }}
   <form (ngSubmit)="onSubmit()" [formGroup]="addNewTodoForm" class="newTodoForm">
     <label class="red-asterisk" for="newTodo-title">Todo</label>
 

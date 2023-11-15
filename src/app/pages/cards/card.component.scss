@@ -30,12 +30,12 @@
   @apply block uppercase;
 }
 
-.button {
-  @apply border border-black rounded p-2.5 m-2.5;
-}
-
 .selected {
   @apply bg-gradient-to-bl from-gray-300 to-gray-600;
+}
+
+.button {
+  @apply border border-black rounded p-2.5 m-2.5;
 }
 
 .button-edit img,
