@@ -10,7 +10,8 @@
   @apply rotate-y-180;
 }
 
-.flip-card-front, .flip-card-back {
+.flip-card-front,
+.flip-card-back {
   @apply absolute w-full h-full backface-hidden;
 }
 
@@ -30,10 +31,15 @@
   @apply block uppercase;
 }
 
+.selected {
+  @apply bg-gradient-to-bl from-gray-300 to-gray-600;
+}
+
 .button {
   @apply border border-black rounded p-2.5 m-2.5;
 }
 
-.selected {
-  @apply bg-gradient-to-bl from-gray-300 to-gray-600;
+.button-edit img,
+.button-delete img {
+  @apply w-5 h-5;
 }

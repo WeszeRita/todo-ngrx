@@ -42,7 +42,7 @@ export class TodoEffects {
       .pipe(
         ofType(TodoActions.editTodo),
         switchMap(({ todo }) => {
-          return this.todoService.editTodo( todo )
+          return this.todoService.editTodo(todo)
             .pipe(
               map((todo: ITodo) => TodoActions.todoEdited({ todo })),
               catchError((error) => of(TodoActions.errorEditTodo({ error }))),

@@ -12,8 +12,19 @@ export namespace TodoSelectors {
     (state: ITodoState) => state.todos,
   );
 
-  export const selectTodoById = (todoId: number)  =>  createSelector(
+  export const editingId = createSelector(
+    selectTodoFeature,
+    (state: ITodoState) => state.selectedId,
+  );
+
+  export const selectTodoById = (todoId: number) => createSelector(
     selectTodos,
-    (todos: ITodo[]) => todos.find((todo) => todo.id === todoId)
+    (todos: ITodo[]) => {
+      if (!todos) {
+        return undefined;
+      }
+
+      return todos.find((todo) => todo.id === todoId);
+    }
   );
 }

@@ -10,29 +10,18 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  selectedTodo: ITodo;
-  isCancelled: boolean;
   todos$: Observable<ITodo[]>;
-  isCancelledOnCard: boolean;
+  editedId: number;
 
-  constructor(private todoFacadeService: TodoFacadeService) {
-  }
+  constructor(private todoFacadeService: TodoFacadeService) {}
 
   ngOnInit(): void {
-    this.todoFacadeService.initTodos();
+    this.todoFacadeService.loadTodos();
     this.todos$ = this.todoFacadeService.getTodos();
-  }
 
-  selectedTodoEmitted(todo: ITodo) {
-    this.selectedTodo = todo;
+    this.todoFacadeService.getEditingTodoId()
+      .subscribe((id: number) => {
+        this.editedId = id;
+      });
   }
-
-  onCancelled() {
-    this.isCancelled = true;
-  }
-
-  cancelOnCardEmitted() {
-    this.isCancelledOnCard = true;
-  }
-
 }

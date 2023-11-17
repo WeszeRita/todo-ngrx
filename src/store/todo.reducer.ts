@@ -4,13 +4,15 @@ import { TodoActions } from './todo.actions';
 
 export interface ITodoState {
   todos: ITodo[];
+  selectedId: number;
   error: Error;
 }
 
 export const initialState: ITodoState = {
   todos: undefined,
+  selectedId: undefined,
   error: undefined,
-}
+};
 
 export const todoReducer = createReducer(
   initialState,
@@ -22,9 +24,13 @@ export const todoReducer = createReducer(
     ...state,
     todos: [...(state.todos), action.todo],
   })),
+  on(TodoActions.selectTodoId, (state, action) => ({
+    ...state,
+    selectedId: action.id,
+  })),
   on(TodoActions.todoRemoved, (state, action) => ({
-      ...state,
-      todos: state.todos.filter((item) => item.id !== action.id),
+    ...state,
+    todos: state.todos.filter((item) => item.id !== action.id),
   })),
   on(
     TodoActions.errorLoadTodos,
@@ -32,7 +38,7 @@ export const todoReducer = createReducer(
     TodoActions.errorEditTodo,
     TodoActions.errorRemoveTodo,
     (state, action) => ({
-    ...state,
-    error: action.error
-  })),
-)
+      ...state,
+      error: action.error
+    })),
+);

@@ -1,13 +1,7 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input, OnChanges,
-  Output,
-} from '@angular/core';
-import { ITodo } from '../../../models/todo.model';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import { TodoFacadeService } from '../../../service/todo-facade.service';
-import { RadioButton } from '../../../constants/radio-button.enum';
+import { ITodo } from '../../../models/todo.model';
 
 @Component({
   selector: 'app-card',
@@ -15,51 +9,37 @@ import { RadioButton } from '../../../constants/radio-button.enum';
   styleUrls: ['./card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardComponent implements OnChanges {
-  @Output()
-  selectedTodo = new EventEmitter<ITodo>();
-
-  @Output()
-  cancelOnCard = new EventEmitter<boolean>();
-
-  @Input()
-  isEditing: boolean;
-
+export class CardComponent {
   @Input()
   todo: ITodo;
 
   @Input()
-  isCancelled: boolean;
+  editedId: number;
 
-  constructor(private todoFacadeService: TodoFacadeService) {
-  }
+  selectedId$: Observable<number>;
+  isEditing = false;
 
-  toggleEdit(): void {
-    if (this.isEditing) {
-      this.selectedTodo.emit(
-        {
-          title: '',
-          status: RadioButton.ongoing,
-          id: null,
-        }
-      );
+  constructor(private todoFacadeService: TodoFacadeService) {}
+
+  toggleEdit(id: number): void {
+    if (this.selectedId$) {
       this.isEditing = false;
-      this.cancelOnCard.emit();
+      this.todoFacadeService.selectTotoId(undefined);
+      this.selectedId$ = undefined;
       return;
     }
 
-    if (!this.isEditing) {
-      this.selectedTodo.emit(this.todo);
+    if (!this.selectedId$) {
       this.isEditing = true;
+      this.todoFacadeService.selectTotoId(id);
+      this.selectedId$ = this.todoFacadeService.getEditingTodoId();
       return;
     }
   }
 
   onDeleteTodo(id: number): void {
     this.todoFacadeService.removeTodo(id);
-  }
-
-  ngOnChanges() {
-    this.isEditing = false;
+    this.todoFacadeService.selectTotoId(undefined);
+    this.selectedId$ = undefined;
   }
 }

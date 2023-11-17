@@ -1,7 +1,7 @@
 <div class="formContainer">
   <span class="title">{{ isEditing ? 'Edit Todo' : 'New Todo' }}</span>
 
-  <form (ngSubmit)="onSubmit()" [formGroup]="addNewTodoForm" class="newTodoForm">
+  <form class="todoForm" (ngSubmit)="onSubmit()" [formGroup]="todoForm">
     <label class="red-asterisk" for="newTodo-title">Todo</label>
 
     <input
@@ -17,7 +17,7 @@
       please, write here your new todo
     </span>
 
-    <h3 class="new-todo-title red-asterisk">Status</h3>
+    <span class="new-todo-title red-asterisk">Status</span>
 
     <input
       id="'RadioButton.completed'"
@@ -43,14 +43,14 @@
       value="{{ RadioButton.pending }}">
     <label for="'RadioButton.pending'">{{ RadioButton.pending }}</label><br>
 
-    <span *ngIf="addNewTodoForm.invalid && addNewTodoForm.touched" class="error-message">please, mark the status</span>
+    <span *ngIf="todoForm.invalid && todoForm.touched" class="error-message">please, mark the status</span>
 
     <button
       class="button disabled:bg-grey-600"
       [ngClass]="isEditing ? 'button-update' : 'button-new'"
       type="submit"
-      [disabled]="addNewTodoForm.invalid && !addNewTodoForm.touched">
-      {{ buttonText }}
+      [disabled]="todoForm.invalid && !todoForm.touched">
+      {{ isEditing ? ButtonTitle.isEditing : ButtonTitle.addNewTodo }}
     </button>
 
     <button
