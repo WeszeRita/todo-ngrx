@@ -1,6 +1,5 @@
 <div class="flip-card">
   <div class="flip-card-inner">
-    <!-- the boolean condition repeats, it'd be better to put it into getter -->
     <div class="flip-card-front" [ngClass]="isEditingTodo ? 'selected' : 'flip-card-front'">
       <span class="todo-title">{{ todo.title }}</span>
     </div>
@@ -15,7 +14,7 @@
           <img src="assets/icons/edit.svg" alt="edit todo icon" >
         </button>
 
-        <button class="button button-delete" (click)="onDeleteTodo(todo.id)">
+        <button class="button button-delete" (click)="deleteTodo(todo.id)">
           <img src="assets/icons/delete.svg" alt="delete todo icon">
         </button>
       </div>

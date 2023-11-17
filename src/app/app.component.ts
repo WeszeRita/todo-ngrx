@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ITodo } from '../models/todo.model';
+import { ITodo } from '../models';
 import { TodoFacadeService } from '../service/todo-facade.service';
 import { Observable } from 'rxjs';
 

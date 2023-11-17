@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, OnInit, } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { RadioButton } from '../../../constants/radio-button.enum';
+import { RadioButton } from '../../../constants';
 import { TodoFacadeService } from '../../../service/todo-facade.service';
-import { ButtonTitle } from '../../../constants/button-title.enum';
 import { EMPTY, switchMap } from 'rxjs';
-import { ITodo } from '../../../models/todo.model';
+import { ITodo } from '../../../models';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -15,11 +14,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class FormComponent implements OnInit {
   protected readonly RadioButton = RadioButton;
-  protected readonly ButtonTitle = ButtonTitle;
 
   todoForm: FormGroup;
   // not used field
-  buttonText = ButtonTitle.addNewTodo;
+  buttonText = 'add new todo';
   // we can use selectedId field for checking if it's editing or not
   isEditing = false;
   selectedId: number;
@@ -97,7 +95,7 @@ export class FormComponent implements OnInit {
 
   resetForm(): void {
     this.isEditing = false;
-    this.buttonText = ButtonTitle.addNewTodo;
+    this.buttonText = 'add new todo';
     this.todoForm.reset();
     this.todoForm.setValue({
       title: null,

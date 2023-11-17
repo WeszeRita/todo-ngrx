@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TodoFacadeService } from '../../../service/todo-facade.service';
-import { ITodo } from '../../../models/todo.model';
+import { ITodo } from '../../../models';
 
 @Component({
   selector: 'app-card',
@@ -44,8 +44,7 @@ export class CardComponent {
     }
   }
 
-  // we can simplify - deleteTodo() {...}
-  onDeleteTodo(id: number): void {
+  deleteTodo(id: number): void {
     this.todoFacadeService.removeTodo(id);
     this.todoFacadeService.selectTotoId(undefined);
     this.selectedId$ = undefined;

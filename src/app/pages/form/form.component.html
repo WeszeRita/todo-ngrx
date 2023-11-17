@@ -1,8 +1,7 @@
 <div class="formContainer">
   <span class="title">{{ isEditing ? 'Edit Todo' : 'New Todo' }}</span>
 
-  <!-- event binding should be the last -->
-  <form class="todoForm" (ngSubmit)="onSubmit()" [formGroup]="todoForm">
+  <form class="todoForm" [formGroup]="todoForm" (ngSubmit)="onSubmit()">
     <label class="red-asterisk" for="newTodo-title">Todo</label>
 
     <input
@@ -63,7 +62,7 @@
       [ngClass]="isEditing ? 'button-update' : 'button-new'"
       type="submit"
       [disabled]="todoForm.invalid && !todoForm.touched">
-      {{ isEditing ? ButtonTitle.isEditing : ButtonTitle.addNewTodo }}
+      {{ isEditing ? 'update todo' : 'add new todo' }}
     </button>
 
     <button
