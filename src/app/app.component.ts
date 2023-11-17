@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
     this.todoFacadeService.loadTodos();
     this.todos$ = this.todoFacadeService.getTodos();
 
+    // add unsubsctiption or convert it to use of async pipe with shareReply.
     this.todoFacadeService.getEditingTodoId()
       .subscribe((id: number) => {
         this.editedId = id;

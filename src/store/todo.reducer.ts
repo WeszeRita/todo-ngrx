@@ -22,7 +22,8 @@ export const todoReducer = createReducer(
   })),
   on(TodoActions.todoCreated, (state, action) => ({
     ...state,
-    todos: [...(state.todos), action.todo],
+    // parentheses are not needed here
+    todos: [...state.todos, action.todo],
   })),
   on(TodoActions.selectTodoId, (state, action) => ({
     ...state,
@@ -32,6 +33,7 @@ export const todoReducer = createReducer(
     ...state,
     todos: state.todos.filter((item) => item.id !== action.id),
   })),
+  // your forgot about the todo-edited action
   on(
     TodoActions.errorLoadTodos,
     TodoActions.errorTodo,

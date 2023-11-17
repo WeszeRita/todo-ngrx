@@ -18,18 +18,23 @@ export class FormComponent implements OnInit {
   protected readonly ButtonTitle = ButtonTitle;
 
   todoForm: FormGroup;
+  // not used field
   buttonText = ButtonTitle.addNewTodo;
+  // we can use selectedId field for checking if it's editing or not
   isEditing = false;
   selectedId: number;
 
+  // rename to titleControl
   get newTodoTitle(): AbstractControl {
     return this.todoForm.controls['title'];
   }
 
-  constructor(private todoFacadeService: TodoFacadeService,
-              private cdr: ChangeDetectorRef,
-              private destroyRef: DestroyRef) {
-  }
+  // align it
+  constructor(
+    private todoFacadeService: TodoFacadeService,
+    private cdr: ChangeDetectorRef,
+    private destroyRef: DestroyRef,
+  ) {}
 
   ngOnInit(): void {
     this.todoForm = new FormGroup({
@@ -65,9 +70,9 @@ export class FormComponent implements OnInit {
 
   onSubmit(): void {
     if (!this.isEditing) {
-      const todo = this.todoForm.value;
-      this.todoFacadeService.createNewTodo(todo);
-      this.resetForm();
+      // const todo = this.todoForm.value; // we don't need the constant here
+      this.todoFacadeService.createNewTodo(this.todoForm.value);
+      this.resetForm(); // it repeats in both IFs, can be moved outside
       return;
     }
 
@@ -77,17 +82,17 @@ export class FormComponent implements OnInit {
         ...this.todoForm.value,
       };
       this.todoFacadeService.editTodo(todo);
-      this.todoFacadeService.selectTotoId(undefined);
-      this.todoFacadeService.loadTodos();
+      this.todoFacadeService.selectTotoId(undefined); // ? you can also do it inside effect when you save the editing result
+      this.todoFacadeService.loadTodos(); // edit it inside reducer and you will see updated todo, but not to load it again
       this.resetForm();
       return;
     }
-    this.cdr.detectChanges();
+    this.cdr.detectChanges(); // it will not be run, because both IFs have "return;"
   }
 
   onCancel(): void {
     this.resetForm();
-    this.todoFacadeService.selectTotoId(undefined);
+    this.todoFacadeService.selectTotoId(undefined); // better to put into facade method "cancelEditing()" and you can call it there.
   }
 
   resetForm(): void {

@@ -25,8 +25,9 @@ import { CardComponent } from './pages/cards/card.component';
     HttpClientModule,
     ReactiveFormsModule,
     EffectsModule.forRoot([TodoEffects]),
-    StoreModule.forRoot({}, {}),
-    StoreModule.forFeature(todoFeatureKey, todoReducer),
+    StoreModule.forRoot({
+      [todoFeatureKey]: todoReducer,
+    }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [TodoService, TodoFacadeService],

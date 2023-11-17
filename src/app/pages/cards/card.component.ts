@@ -16,12 +16,19 @@ export class CardComponent {
   @Input()
   editedId: number;
 
+  // this observable is not used here
   selectedId$: Observable<number>;
   isEditing = false;
+
+  get isEditingTodo(): boolean {
+    // notes: we have isEditing flag already here, why not to use it?
+    return this.editedId === this.todo.id;
+  }
 
   constructor(private todoFacadeService: TodoFacadeService) {}
 
   toggleEdit(id: number): void {
+    // refactor the code
     if (this.selectedId$) {
       this.isEditing = false;
       this.todoFacadeService.selectTotoId(undefined);
@@ -37,6 +44,7 @@ export class CardComponent {
     }
   }
 
+  // we can simplify - deleteTodo() {...}
   onDeleteTodo(id: number): void {
     this.todoFacadeService.removeTodo(id);
     this.todoFacadeService.selectTotoId(undefined);

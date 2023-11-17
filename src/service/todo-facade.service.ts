@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { filter, Observable } from 'rxjs';
+// use index.ts in models
 import { ITodo } from '../models/todo.model';
+// use index.ts file in the "store" folder with exports
 import { TodoActions } from '../store/todo.actions';
 import { TodoSelectors } from '../store/todo.selectors';
 
 @Injectable()
 export class TodoFacadeService {
-
   constructor(private store: Store) {}
 
   createNewTodo(todo: ITodo): void {

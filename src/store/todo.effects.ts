@@ -55,8 +55,7 @@ export class TodoEffects {
     return this.actions$
       .pipe(
         ofType(TodoActions.removeTodo),
-        switchMap((action) => {
-          const id = action.id;
+        switchMap(({ id }) => {
 
           return this.todoService.removeTodo(id)
             .pipe(

@@ -1,6 +1,7 @@
 <div class="formContainer">
   <span class="title">{{ isEditing ? 'Edit Todo' : 'New Todo' }}</span>
 
+  <!-- event binding should be the last -->
   <form class="todoForm" (ngSubmit)="onSubmit()" [formGroup]="todoForm">
     <label class="red-asterisk" for="newTodo-title">Todo</label>
 
@@ -19,13 +20,25 @@
 
     <span class="new-todo-title red-asterisk">Status</span>
 
+    <!-- id RadioButton.completed is not a value here -->
+    <!-- we can also render statuses here by using ngFor -->
     <input
-      id="'RadioButton.completed'"
+      [id]="RadioButton.completed"
       formControlName="status"
       name="status"
       type="radio"
-      value="{{ RadioButton.completed }}">
-    <label for="'RadioButton.completed'">{{ RadioButton.completed }}</label><br>
+      [value]="RadioButton.completed">
+    <label [for]="RadioButton.completed">{{ RadioButton.completed }}</label> <!-- use css, not br --><br>
+
+<!--    <label>-->
+<!--      <input-->
+<!--        formControlName="status"-->
+<!--        name="status"-->
+<!--        type="radio"-->
+<!--        [value]="RadioButton.completed">-->
+
+<!--      {{ RadioButton.completed }}-->
+<!--    </label>-->
 
     <input
       id="'RadioButton.ongoing'"

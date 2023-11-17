@@ -1,10 +1,11 @@
 <div class="flip-card">
   <div class="flip-card-inner">
-    <div class="flip-card-front" [ngClass]="editedId === todo.id ? 'selected' : 'flip-card-front'">
+    <!-- the boolean condition repeats, it'd be better to put it into getter -->
+    <div class="flip-card-front" [ngClass]="isEditingTodo ? 'selected' : 'flip-card-front'">
       <span class="todo-title">{{ todo.title }}</span>
     </div>
 
-    <div class="flip-card-back" [ngClass]="editedId === todo.id ? 'selected' : 'flip-card-back'">
+    <div class="flip-card-back" [ngClass]="isEditingTodo ? 'selected' : 'flip-card-back'">
       <span class="todo-title">{{ todo.title }}</span>
 
       <span class="status">{{ todo.status }}</span>
