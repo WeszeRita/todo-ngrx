@@ -5,6 +5,7 @@
 <div class="container">
   <app-card
     *ngFor="let todo of todos$ | async"
+    [editedId]="editedId"
     [todo]="todo">
   </app-card>
 </div>

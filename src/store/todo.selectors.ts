@@ -17,7 +17,7 @@ export namespace TodoSelectors {
     (state: ITodoState) => state.selectedId,
   );
 
-  export const selectTodoById = (todoId: number)  =>  createSelector(
+  export const selectTodoById = (todoId: number) => createSelector(
     selectTodos,
     (todos: ITodo[]) => {
       if (!todos) {

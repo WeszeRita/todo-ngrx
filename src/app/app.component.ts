@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ITodo } from '../models/todo.model';
 import { TodoFacadeService } from '../service/todo-facade.service';
 import { Observable } from 'rxjs';
@@ -9,15 +9,19 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   todos$: Observable<ITodo[]>;
+  editedId: number;
 
-  constructor(private todoFacadeService: TodoFacadeService) {
-  }
+  constructor(private todoFacadeService: TodoFacadeService) {}
 
   ngOnInit(): void {
-    this.todoFacadeService.initTodos();         // TODO: move to the card comp? (+rename the action)
+    this.todoFacadeService.loadTodos();
     this.todos$ = this.todoFacadeService.getTodos();
-  }
 
+    this.todoFacadeService.getEditingTodoId()
+      .subscribe((id: number) => {
+        this.editedId = id;
+      });
+  }
 }

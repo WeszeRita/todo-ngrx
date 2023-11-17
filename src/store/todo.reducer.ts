@@ -12,7 +12,7 @@ export const initialState: ITodoState = {
   todos: undefined,
   selectedId: undefined,
   error: undefined,
-}
+};
 
 export const todoReducer = createReducer(
   initialState,
@@ -29,8 +29,8 @@ export const todoReducer = createReducer(
     selectedId: action.id,
   })),
   on(TodoActions.todoRemoved, (state, action) => ({
-      ...state,
-      todos: state.todos.filter((item) => item.id !== action.id),
+    ...state,
+    todos: state.todos.filter((item) => item.id !== action.id),
   })),
   on(
     TodoActions.errorLoadTodos,
@@ -38,7 +38,7 @@ export const todoReducer = createReducer(
     TodoActions.errorEditTodo,
     TodoActions.errorRemoveTodo,
     (state, action) => ({
-    ...state,
-    error: action.error
-  })),
-)
+      ...state,
+      error: action.error
+    })),
+);

@@ -11,7 +11,7 @@
 }
 
 .title {
-  @apply text-xl font-medium pt-10 px-40;
+  @apply text-xl font-medium block pl-40 pt-6;
 }
 
 .red-asterisk {
@@ -26,7 +26,7 @@
   @apply mt-5;
 }
 
-.newTodoForm {
+.todoForm {
   @apply px-40;
 }
 
@@ -43,5 +43,5 @@
 }
 
 .button-cancel {
-  @apply bg-red-500;
+  @apply bg-red-500 ml-2;
 }

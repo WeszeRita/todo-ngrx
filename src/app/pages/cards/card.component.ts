@@ -1,11 +1,7 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-} from '@angular/core';
-import { ITodo } from '../../../models/todo.model';
-import { TodoFacadeService } from '../../../service/todo-facade.service';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
+import { TodoFacadeService } from '../../../service/todo-facade.service';
+import { ITodo } from '../../../models/todo.model';
 
 @Component({
   selector: 'app-card',
@@ -17,30 +13,28 @@ export class CardComponent {
   @Input()
   todo: ITodo;
 
+  @Input()
+  editedId: number;
+
   selectedId$: Observable<number>;
   isEditing = false;
 
-  constructor(private todoFacadeService: TodoFacadeService) {
-  }
+  constructor(private todoFacadeService: TodoFacadeService) {}
 
   toggleEdit(id: number): void {
     if (this.selectedId$) {
-      // console.log('editing is finished')
       this.isEditing = false;
       this.todoFacadeService.selectTotoId(undefined);
       this.selectedId$ = undefined;
-      // console.log('selected id (should be undef.)', this.selectedId$)
-      return
-    }
-    if (!this.selectedId$){
-      // console.log('user can edit the todo')
-      this.isEditing = true;
-      this.todoFacadeService.selectTotoId(id);
-      this.selectedId$ = this.todoFacadeService.getEditingTodoId();
-      // console.log('selected id in isEditing mode', this.selectedId$)
       return;
     }
 
+    if (!this.selectedId$) {
+      this.isEditing = true;
+      this.todoFacadeService.selectTotoId(id);
+      this.selectedId$ = this.todoFacadeService.getEditingTodoId();
+      return;
+    }
   }
 
   onDeleteTodo(id: number): void {

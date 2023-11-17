@@ -21,7 +21,7 @@ export class TodoService {
     return this.http.post<ITodo>(this.url, { ...todo }, options);
   }
 
-  editTodo( todo: ITodo): Observable<ITodo> {
+  editTodo(todo: ITodo): Observable<ITodo> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers };
     return this.http.put<ITodo>(`${ this.url }/${ todo.id }`, { ...todo }, options);

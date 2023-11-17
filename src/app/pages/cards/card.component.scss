@@ -10,7 +10,8 @@
   @apply rotate-y-180;
 }
 
-.flip-card-front, .flip-card-back {
+.flip-card-front,
+.flip-card-back {
   @apply absolute w-full h-full backface-hidden;
 }
 
@@ -42,4 +43,3 @@
 .button-delete img {
   @apply w-5 h-5;
 }
-
