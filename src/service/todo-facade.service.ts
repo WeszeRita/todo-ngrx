@@ -33,11 +33,11 @@ export class TodoFacadeService {
     this.store.dispatch(TodoActions.editTodo({ todo }));
   }
 
-  selectTotoId(id: number) {
+  selectTotoId(id: number): void {
     return this.store.dispatch(TodoActions.selectTodoId({ id }));
   }
 
-  cancelEditing() {
+  cancelEditing(): void {
     this.selectTotoId(undefined);
   }
 

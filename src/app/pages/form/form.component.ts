@@ -38,6 +38,7 @@ export class FormComponent implements OnInit {
         switchMap((todoId: number) => {
           if (!todoId) {
             this.resetForm();
+            this.selectedId = undefined;
             this.cdr.detectChanges();
             return EMPTY;
           }
@@ -74,8 +75,8 @@ export class FormComponent implements OnInit {
   }
 
   onCancel(): void {
-    this.resetForm();
     this.todoFacadeService.cancelEditing();
+    this.resetForm();
   }
 
   resetForm(): void {

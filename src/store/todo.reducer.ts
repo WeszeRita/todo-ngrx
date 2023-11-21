@@ -33,7 +33,7 @@ export const todoReducer = createReducer(
     todos: state.todos.filter((item) => item.id !== action.id),
   })),
   on(TodoActions.todoEdited, (state, action) => {
-    const indexOfTodoToUpdate = state.todos.findIndex(todo => todo.id === action.todo.id);
+    const indexOfTodoToUpdate = state.todos.findIndex((todo) => todo.id === action.todo.id);
     const updatedTodos = [...state.todos];
     updatedTodos[indexOfTodoToUpdate] = action.todo;
 

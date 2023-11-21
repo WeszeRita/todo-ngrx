@@ -9,7 +9,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrls: ['./card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardComponent implements OnInit{
+export class CardComponent implements OnInit {
   @Input()
   todo: ITodo;
 
@@ -35,7 +35,6 @@ export class CardComponent implements OnInit{
   toggleEdit(id: number): void {
     if (this.selectedId !== this.todo.id) {
       this.todoFacadeService.cancelEditing();
-      this.selectedId = undefined;
     }
 
     if (this.selectedId) {
@@ -48,7 +47,7 @@ export class CardComponent implements OnInit{
 
   deleteTodo(id: number): void {
     this.todoFacadeService.removeTodo(id);
-    this.todoFacadeService.selectTotoId(undefined);
+    this.todoFacadeService.cancelEditing();
     this.selectedId = undefined;
   }
 }

@@ -1,8 +1,5 @@
-/** @type {import('tailwindcss').Config} */
 const plugin = require('tailwindcss/plugin');
 
-// 1. use arrow functions instead of function expression
-// 2. use single quotes
 const cardClasses = plugin(({ addUtilities }) => {
   addUtilities({
     '.rotate-y-180': {
@@ -20,7 +17,6 @@ const cardClasses = plugin(({ addUtilities }) => {
   });
 });
 
-// semicolon, quotes
 module.exports = {
   content: ['./src/**/*.{html,ts}'],
   theme: {
