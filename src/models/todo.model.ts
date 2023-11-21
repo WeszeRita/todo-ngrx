@@ -1,7 +1,7 @@
-import { status } from '../constants';
+import { Status } from '../constants';
 
 export interface ITodo {
   id: number;
   title: string;
-  status: `${ status }`;
+  status: `${ Status }`;
 }

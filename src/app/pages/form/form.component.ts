@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, OnInit, } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { status } from '../../../constants';
+import { Status } from '../../../constants';
 import { TodoFacadeService } from '../../../service';
 import { EMPTY, switchMap } from 'rxjs';
 import { ITodo } from '../../../models';
@@ -15,7 +15,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class FormComponent implements OnInit {
   todoForm: FormGroup;
   selectedId: number;
-  readonly todoStatuses = Object.keys(status);
+  readonly todoStatuses = Object.keys(Status);
 
   get titleControl(): AbstractControl {
     return this.todoForm.controls['title'];
