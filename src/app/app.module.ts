@@ -1,18 +1,14 @@
 import { NgModule, isDevMode } from '@angular/core';
-import { todoReducer } from '../store/todo.reducer';
 import { BrowserModule } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { AppComponent } from './app.component';
-import { TodoService } from '../service/todo.service';
-import { FormComponent } from './pages/form/form.component';
-import { TodoFacadeService } from '../service/todo-facade.service';
-import { TodoEffects } from '../store/todo.effects';
-import { todoFeatureKey } from '../store/todo.selectors';
+import { TodoService, TodoFacadeService } from '../service';
+import { FormComponent, CardComponent } from './pages';
+import { TodoEffects, todoFeatureKey, todoReducer } from '../store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { CardComponent } from './pages/cards/card.component';
 
 @NgModule({
   declarations: [
@@ -25,8 +21,9 @@ import { CardComponent } from './pages/cards/card.component';
     HttpClientModule,
     ReactiveFormsModule,
     EffectsModule.forRoot([TodoEffects]),
-    StoreModule.forRoot({}, {}),
-    StoreModule.forFeature(todoFeatureKey, todoReducer),
+    StoreModule.forRoot({
+      [todoFeatureKey]: todoReducer,
+    }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [TodoService, TodoFacadeService],

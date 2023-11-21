@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, OnInit, } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { RadioButton } from '../../../constants/radio-button.enum';
-import { TodoFacadeService } from '../../../service/todo-facade.service';
-import { ButtonTitle } from '../../../constants/button-title.enum';
+import { Status } from '../../../constants';
+import { TodoFacadeService } from '../../../service';
 import { EMPTY, switchMap } from 'rxjs';
-import { ITodo } from '../../../models/todo.model';
+import { ITodo } from '../../../models';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -14,35 +13,32 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormComponent implements OnInit {
-  protected readonly RadioButton = RadioButton;
-  protected readonly ButtonTitle = ButtonTitle;
-
   todoForm: FormGroup;
-  buttonText = ButtonTitle.addNewTodo;
-  isEditing = false;
   selectedId: number;
+  readonly todoStatuses = Object.keys(Status);
 
-  get newTodoTitle(): AbstractControl {
+  get titleControl(): AbstractControl {
     return this.todoForm.controls['title'];
   }
 
-  constructor(private todoFacadeService: TodoFacadeService,
-              private cdr: ChangeDetectorRef,
-              private destroyRef: DestroyRef) {
-  }
+  constructor(
+    private todoFacadeService: TodoFacadeService,
+    private cdr: ChangeDetectorRef,
+    private destroyRef: DestroyRef,
+  ) {}
 
   ngOnInit(): void {
     this.todoForm = new FormGroup({
       title: new FormControl(null, Validators.required),
-      status: new FormControl(RadioButton.ongoing, Validators.required),
+      status: new FormControl(null, Validators.required),
     });
 
     this.todoFacadeService.getEditingTodoId()
       .pipe(
         switchMap((todoId: number) => {
           if (!todoId) {
-            this.isEditing = false;
             this.resetForm();
+            this.selectedId = undefined;
             this.cdr.detectChanges();
             return EMPTY;
           }
@@ -52,7 +48,6 @@ export class FormComponent implements OnInit {
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe((selectedTodo: ITodo) => {
-        this.isEditing = true;
         this.selectedId = selectedTodo.id;
         this.todoForm.setValue({
           title: selectedTodo.title,
@@ -64,39 +59,32 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (!this.isEditing) {
-      const todo = this.todoForm.value;
-      this.todoFacadeService.createNewTodo(todo);
-      this.resetForm();
-      return;
-    }
-
-    if (this.isEditing) {
+    if (!this.selectedId) {
+      this.todoFacadeService.createNewTodo(this.todoForm.value);
+    } else {
       const todo = {
         id: this.selectedId,
         ...this.todoForm.value,
       };
       this.todoFacadeService.editTodo(todo);
-      this.todoFacadeService.selectTotoId(undefined);
-      this.todoFacadeService.loadTodos();
-      this.resetForm();
-      return;
+      this.todoFacadeService.cancelEditing();
+      this.selectedId = undefined;
     }
-    this.cdr.detectChanges();
+
+    this.resetForm();
   }
 
   onCancel(): void {
+    this.todoFacadeService.cancelEditing();
     this.resetForm();
-    this.todoFacadeService.selectTotoId(undefined);
   }
 
   resetForm(): void {
-    this.isEditing = false;
-    this.buttonText = ButtonTitle.addNewTodo;
     this.todoForm.reset();
     this.todoForm.setValue({
       title: null,
-      status: RadioButton.ongoing,
+      status: null,
     });
+    this.cdr.detectChanges();
   }
 }

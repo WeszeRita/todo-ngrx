@@ -1,24 +1,24 @@
 import { createAction, props } from '@ngrx/store';
-import { ITodo } from '../models/todo.model';
+import { ITodo } from '../models';
 
 export const enum TodoAction {
-  loadTodos = '[Todo] Load todos',           // inside [] - module name or component name?
+  loadTodos = '[Todo] Load todos',
   todosLoaded = '[Todo] Todos loaded',
-  errorLoadTodos = '[Todo] Error during loading todos',
+  errorLoadTodos = '[Todo] Load todos error',
 
-  createTodo = '[Todo] Create new todo',
-  todoCreated = '[Todo] New todo created',
-  errorCreateTodo = '[Todo] Error during create todo',
+  createTodo = '[Todo] Create todo',
+  todoCreated = '[Todo] Todo created',
+  errorCreateTodo = '[Todo] Create todo error',
 
-  selectTodoId = '[Todo] Select todoId',
+  selectTodoId = '[Todo] Select todo id',
 
-  editTodo = '[Todo] Edit a todo',
-  todoEdited = '[Todo] A todo edited',
-  errorEditTodo = '[Todo] Error during edit todo',
+  editTodo = '[Todo] Edit todo',
+  todoEdited = '[Todo] Todo edited',
+  errorEditTodo = '[Todo] Edit todo error',
 
-  removeTodo = '[Todo] Remove todo from the list',
-  todoRemoved = '[Todo] Todo removed from the list',
-  errorRemoveTodo = '[Todo] Error during remove todo',
+  removeTodo = '[Todo] Remove todo',
+  todoRemoved = '[Todo] Todo removed',
+  errorRemoveTodo = '[Todo] Remove todo error',
 }
 
 export namespace TodoActions {

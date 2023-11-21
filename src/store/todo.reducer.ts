@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { ITodo } from '../models/todo.model';
+import { ITodo } from '../models';
 import { TodoActions } from './todo.actions';
 
 export interface ITodoState {
@@ -22,7 +22,7 @@ export const todoReducer = createReducer(
   })),
   on(TodoActions.todoCreated, (state, action) => ({
     ...state,
-    todos: [...(state.todos), action.todo],
+    todos: [...state.todos, action.todo],
   })),
   on(TodoActions.selectTodoId, (state, action) => ({
     ...state,
@@ -32,6 +32,16 @@ export const todoReducer = createReducer(
     ...state,
     todos: state.todos.filter((item) => item.id !== action.id),
   })),
+  on(TodoActions.todoEdited, (state, action) => {
+    const indexOfTodoToUpdate = state.todos.findIndex((todo) => todo.id === action.todo.id);
+    const updatedTodos = [...state.todos];
+    updatedTodos[indexOfTodoToUpdate] = action.todo;
+
+    return {
+      ...state,
+      todos: updatedTodos,
+    };
+  }),
   on(
     TodoActions.errorLoadTodos,
     TodoActions.errorTodo,

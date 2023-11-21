@@ -1,7 +1,7 @@
-import { RadioButton } from '../constants/radio-button.enum';
+import { Status } from '../constants';
 
 export interface ITodo {
   id: number;
   title: string;
-  status: `${ RadioButton }`;
+  status: `${ Status }`;
 }

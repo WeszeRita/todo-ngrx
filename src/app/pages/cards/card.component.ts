@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Observable } from 'rxjs';
-import { TodoFacadeService } from '../../../service/todo-facade.service';
-import { ITodo } from '../../../models/todo.model';
+import { ChangeDetectionStrategy, Component, DestroyRef, Input, OnInit } from '@angular/core';
+import { TodoFacadeService } from '../../../service';
+import { ITodo } from '../../../models';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-card',
@@ -9,37 +9,45 @@ import { ITodo } from '../../../models/todo.model';
   styleUrls: ['./card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardComponent {
+export class CardComponent implements OnInit {
   @Input()
   todo: ITodo;
 
   @Input()
   editedId: number;
 
-  selectedId$: Observable<number>;
-  isEditing = false;
+  selectedId: number;
 
-  constructor(private todoFacadeService: TodoFacadeService) {}
+  get isEditingTodo(): boolean {
+    return this.selectedId === this.todo.id;
+  }
+
+  constructor(private todoFacadeService: TodoFacadeService, private destroyRef: DestroyRef) {}
+
+  ngOnInit(): void {
+    this.todoFacadeService.getEditingTodoId()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((id: number) => {
+        this.selectedId = id;
+      });
+  }
 
   toggleEdit(id: number): void {
-    if (this.selectedId$) {
-      this.isEditing = false;
-      this.todoFacadeService.selectTotoId(undefined);
-      this.selectedId$ = undefined;
-      return;
+    if (this.selectedId !== this.todo.id) {
+      this.todoFacadeService.cancelEditing();
     }
 
-    if (!this.selectedId$) {
-      this.isEditing = true;
+    if (this.selectedId) {
+      this.todoFacadeService.cancelEditing();
+    } else {
       this.todoFacadeService.selectTotoId(id);
-      this.selectedId$ = this.todoFacadeService.getEditingTodoId();
-      return;
+      this.todoFacadeService.getEditingTodoId();
     }
   }
 
-  onDeleteTodo(id: number): void {
+  deleteTodo(id: number): void {
     this.todoFacadeService.removeTodo(id);
-    this.todoFacadeService.selectTotoId(undefined);
-    this.selectedId$ = undefined;
+    this.todoFacadeService.cancelEditing();
+    this.selectedId = undefined;
   }
 }

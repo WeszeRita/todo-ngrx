@@ -2,10 +2,9 @@ import { catchError, map, Observable, of, switchMap } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-
-import { TodoService } from '../service/todo.service';
+import { TodoService } from '../service';
 import { TodoActions } from './todo.actions';
-import { ITodo } from '../models/todo.model';
+import { ITodo } from '../models';
 
 @Injectable()
 export class TodoEffects {
@@ -55,9 +54,7 @@ export class TodoEffects {
     return this.actions$
       .pipe(
         ofType(TodoActions.removeTodo),
-        switchMap((action) => {
-          const id = action.id;
-
+        switchMap(({ id }) => {
           return this.todoService.removeTodo(id)
             .pipe(
               map(() => TodoActions.todoRemoved({ id })),

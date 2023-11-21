@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ITodoState } from './todo.reducer';
-import { ITodo } from '../models/todo.model';
+import { ITodo } from '../models';
 
 export const todoFeatureKey = 'todo';
 
