@@ -1,5 +1,5 @@
 <div class="formContainer">
-  <span class="title">{{ isEditing ? 'Edit Todo' : 'New Todo' }}</span>
+  <span class="title">{{ selectedId ? 'Edit Todo' : 'New Todo' }}</span>
 
   <form class="todoForm" [formGroup]="todoForm" (ngSubmit)="onSubmit()">
     <label class="red-asterisk" for="newTodo-title">Todo</label>
@@ -7,66 +7,39 @@
     <input
       id="newTodo-title"
       class="todo-input"
-      [class.error]="newTodoTitle.invalid && newTodoTitle.touched"
+      [class.error]="titleControl.invalid && titleControl.touched"
       [placeholder]="'what are you going to do next...'"
       formControlName="title"
       type="text">
     <span
-      *ngIf="newTodoTitle.invalid && newTodoTitle.touched"
+      *ngIf="titleControl.invalid && titleControl.touched"
       class="error-message">
       please, write here your new todo
     </span>
 
     <span class="new-todo-title red-asterisk">Status</span>
 
-    <!-- id RadioButton.completed is not a value here -->
-    <!-- we can also render statuses here by using ngFor -->
-    <input
-      [id]="RadioButton.completed"
-      formControlName="status"
-      name="status"
-      type="radio"
-      [value]="RadioButton.completed">
-    <label [for]="RadioButton.completed">{{ RadioButton.completed }}</label> <!-- use css, not br --><br>
-
-<!--    <label>-->
-<!--      <input-->
-<!--        formControlName="status"-->
-<!--        name="status"-->
-<!--        type="radio"-->
-<!--        [value]="RadioButton.completed">-->
-
-<!--      {{ RadioButton.completed }}-->
-<!--    </label>-->
-
-    <input
-      id="'RadioButton.ongoing'"
-      formControlName="status"
-      name="status"
-      type="radio"
-      value="{{ RadioButton.ongoing }}">
-    <label for="'RadioButton.ongoing'">{{ RadioButton.ongoing }}</label><br>
-
-    <input
-      id="'RadioButton.pending'"
-      formControlName="status"
-      name="status"
-      type="radio"
-      value="{{ RadioButton.pending }}">
-    <label for="'RadioButton.pending'">{{ RadioButton.pending }}</label><br>
+    <label *ngFor="let status of todoStatuses" class="radio-button-label">
+      <input
+        [value]="status"
+        formControlName="status"
+        name="status"
+        type="radio">
+      {{ status }}
+    </label>
 
     <span *ngIf="todoForm.invalid && todoForm.touched" class="error-message">please, mark the status</span>
 
     <button
       class="button disabled:bg-grey-600"
-      [ngClass]="isEditing ? 'button-update' : 'button-new'"
+      [ngClass]="selectedId ? 'button-update' : 'button-new'"
       type="submit"
-      [disabled]="todoForm.invalid && !todoForm.touched">
-      {{ isEditing ? 'update todo' : 'add new todo' }}
+      [disabled]="todoForm.invalid">
+      {{ selectedId ? 'update todo' : 'add new todo' }}
     </button>
 
     <button
-      *ngIf="isEditing"
+      *ngIf="selectedId"
       class="button button-cancel"
       type="button"
       (click)="onCancel()">

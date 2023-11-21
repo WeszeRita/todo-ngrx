@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ITodo } from '../models';
-import { TodoFacadeService } from '../service/todo-facade.service';
+import { ChangeDetectionStrategy, Component, DestroyRef, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
+import { ITodo } from '../models';
+import { TodoFacadeService } from '../service';
 
 @Component({
   selector: 'app-root',
@@ -13,16 +14,20 @@ export class AppComponent implements OnInit {
   todos$: Observable<ITodo[]>;
   editedId: number;
 
-  constructor(private todoFacadeService: TodoFacadeService) {}
+  constructor(private todoFacadeService: TodoFacadeService, private destroyRef: DestroyRef) {}
 
   ngOnInit(): void {
     this.todoFacadeService.loadTodos();
     this.todos$ = this.todoFacadeService.getTodos();
 
-    // add unsubsctiption or convert it to use of async pipe with shareReply.
     this.todoFacadeService.getEditingTodoId()
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((id: number) => {
         this.editedId = id;
       });
+  }
+
+  trackByTodoId(_, todo: ITodo) {
+    return todo.id;
   }
 }

@@ -3,12 +3,9 @@
 <app-form></app-form>
 
 <div class="container">
-  <!-- Add trackBy -->
   <app-card
-    *ngFor="let todo of (todos$ | async)"
+    *ngFor="let todo of (todos$ | async); trackBy: trackByTodoId"
     [editedId]="editedId"
     [todo]="todo">
   </app-card>
 </div>
-
-

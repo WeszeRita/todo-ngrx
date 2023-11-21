@@ -1,8 +1,7 @@
-// Add index.ts in constants folder
-import { RadioButton } from '../constants/radio-button.enum';
+import { status } from '../constants';
 
 export interface ITodo {
   id: number;
   title: string;
-  status: `${ RadioButton }`;
+  status: `${ status }`;
 }

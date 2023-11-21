@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, OnInit, } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { RadioButton } from '../../../constants';
-import { TodoFacadeService } from '../../../service/todo-facade.service';
+import { status } from '../../../constants';
+import { TodoFacadeService } from '../../../service';
 import { EMPTY, switchMap } from 'rxjs';
 import { ITodo } from '../../../models';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -13,21 +13,14 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormComponent implements OnInit {
-  protected readonly RadioButton = RadioButton;
-
   todoForm: FormGroup;
-  // not used field
-  buttonText = 'add new todo';
-  // we can use selectedId field for checking if it's editing or not
-  isEditing = false;
   selectedId: number;
+  readonly todoStatuses = Object.keys(status);
 
-  // rename to titleControl
-  get newTodoTitle(): AbstractControl {
+  get titleControl(): AbstractControl {
     return this.todoForm.controls['title'];
   }
 
-  // align it
   constructor(
     private todoFacadeService: TodoFacadeService,
     private cdr: ChangeDetectorRef,
@@ -37,14 +30,13 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this.todoForm = new FormGroup({
       title: new FormControl(null, Validators.required),
-      status: new FormControl(RadioButton.ongoing, Validators.required),
+      status: new FormControl(null, Validators.required),
     });
 
     this.todoFacadeService.getEditingTodoId()
       .pipe(
         switchMap((todoId: number) => {
           if (!todoId) {
-            this.isEditing = false;
             this.resetForm();
             this.cdr.detectChanges();
             return EMPTY;
@@ -55,7 +47,6 @@ export class FormComponent implements OnInit {
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe((selectedTodo: ITodo) => {
-        this.isEditing = true;
         this.selectedId = selectedTodo.id;
         this.todoForm.setValue({
           title: selectedTodo.title,
@@ -67,39 +58,32 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (!this.isEditing) {
-      // const todo = this.todoForm.value; // we don't need the constant here
+    if (!this.selectedId) {
       this.todoFacadeService.createNewTodo(this.todoForm.value);
-      this.resetForm(); // it repeats in both IFs, can be moved outside
-      return;
-    }
-
-    if (this.isEditing) {
+    } else {
       const todo = {
         id: this.selectedId,
         ...this.todoForm.value,
       };
       this.todoFacadeService.editTodo(todo);
-      this.todoFacadeService.selectTotoId(undefined); // ? you can also do it inside effect when you save the editing result
-      this.todoFacadeService.loadTodos(); // edit it inside reducer and you will see updated todo, but not to load it again
-      this.resetForm();
-      return;
+      this.todoFacadeService.cancelEditing();
+      this.selectedId = undefined;
     }
-    this.cdr.detectChanges(); // it will not be run, because both IFs have "return;"
+
+    this.resetForm();
   }
 
   onCancel(): void {
     this.resetForm();
-    this.todoFacadeService.selectTotoId(undefined); // better to put into facade method "cancelEditing()" and you can call it there.
+    this.todoFacadeService.cancelEditing();
   }
 
   resetForm(): void {
-    this.isEditing = false;
-    this.buttonText = 'add new todo';
     this.todoForm.reset();
     this.todoForm.setValue({
       title: null,
-      status: RadioButton.ongoing,
+      status: null,
     });
+    this.cdr.detectChanges();
   }
 }

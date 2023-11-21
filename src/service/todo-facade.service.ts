@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { filter, Observable } from 'rxjs';
-// use index.ts in models
-import { ITodo } from '../models/todo.model';
-// use index.ts file in the "store" folder with exports
-import { TodoActions } from '../store/todo.actions';
-import { TodoSelectors } from '../store/todo.selectors';
+import { ITodo } from '../models';
+import { TodoActions, TodoSelectors } from '../store';
 
 @Injectable()
 export class TodoFacadeService {
@@ -38,6 +35,10 @@ export class TodoFacadeService {
 
   selectTotoId(id: number) {
     return this.store.dispatch(TodoActions.selectTodoId({ id }));
+  }
+
+  cancelEditing() {
+    this.selectTotoId(undefined);
   }
 
   removeTodo(id: number): void {

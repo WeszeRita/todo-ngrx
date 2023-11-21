@@ -30,6 +30,10 @@
   @apply px-40;
 }
 
+.radio-button-label {
+  @apply block;
+}
+
 .button {
   @apply text-white rounded-full py-2 px-4 my-6 right-0 disabled:bg-gray-400;
 }

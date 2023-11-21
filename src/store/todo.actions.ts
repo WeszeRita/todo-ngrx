@@ -1,13 +1,13 @@
 import { createAction, props } from '@ngrx/store';
-import { ITodo } from '../models/todo.model';
+import { ITodo } from '../models';
 
 export const enum TodoAction {
-  loadTodos = '[Todo] Load todos',           // inside [] - module name or component name? - Answer: Not module and not component :) It should be the topic what you're storing in Store - [Group/Topic]
+  loadTodos = '[Todo] Load todos',
   todosLoaded = '[Todo] Todos loaded',
   errorLoadTodos = '[Todo] Load todos error',
 
   createTodo = '[Todo] Create todo',
-  todoCreated = '[Todo] New todo created',
+  todoCreated = '[Todo] Todo created',
   errorCreateTodo = '[Todo] Create todo error',
 
   selectTodoId = '[Todo] Select todo id',
@@ -16,7 +16,7 @@ export const enum TodoAction {
   todoEdited = '[Todo] Todo edited',
   errorEditTodo = '[Todo] Edit todo error',
 
-  removeTodo = '[Todo] Remove todo', // we don't need the explanation here where it will be removed
+  removeTodo = '[Todo] Remove todo',
   todoRemoved = '[Todo] Todo removed',
   errorRemoveTodo = '[Todo] Remove todo error',
 }
